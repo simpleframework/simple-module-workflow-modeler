@@ -18,7 +18,7 @@ import net.simpleframework.common.Version;
 import net.simpleframework.common.coll.KVMap;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 import net.simpleframework.workflow.schema.AbstractParticipantType;
-import net.simpleframework.workflow.schema.AbstractParticipantType.Role;
+import net.simpleframework.workflow.schema.AbstractParticipantType.BaseRole;
 import net.simpleframework.workflow.schema.AbstractParticipantType.User;
 import net.simpleframework.workflow.schema.AbstractProcessStartupType;
 import net.simpleframework.workflow.schema.AbstractProcessStartupType.Email;
@@ -39,7 +39,7 @@ public class ModelEditor extends AbstractEditorDialog {
 			$m("AbstractProcessStartupType.Manual"), $m("AbstractProcessStartupType.Email")));
 
 	private static final Vector<String> participantTypes = new Vector<String>(Arrays.asList(
-			$m("AbstractParticipantType.Role"), $m("AbstractParticipantType.User")));
+			$m("AbstractParticipantType.BaseRole"), $m("AbstractParticipantType.User")));
 
 	protected ListenerPane listenerPane;
 
@@ -162,7 +162,7 @@ public class ModelEditor extends AbstractEditorDialog {
 			processNode.setStartupType(m);
 			final int j = participantTypeCb.getSelectedIndex();
 			if (j == 0) {
-				final Role r = new Role(null, m);
+				final BaseRole r = new BaseRole(null, m);
 				r.setParticipant(participantTf.getText());
 				m.setParticipantType(r);
 			} else if (j == 1) {

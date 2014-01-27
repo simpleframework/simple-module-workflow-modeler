@@ -37,7 +37,7 @@ import net.simpleframework.workflow.schema.UserNode.RuleRole;
 public class UserNodeEditor extends AbstractEditorDialog {
 
 	private static final Vector<String> participantTypes = new Vector<String>(Arrays.asList(
-			$m("AbstractParticipantType.Role"), $m("AbstractParticipantType.RelativeRole"),
+			$m("AbstractParticipantType.BaseRole"), $m("AbstractParticipantType.RelativeRole"),
 			$m("AbstractParticipantType.User"), $m("AbstractParticipantType.RuleRole")));
 
 	public UserNodeEditor(final ModelGraph modelGraph, final TaskCell cell) {
