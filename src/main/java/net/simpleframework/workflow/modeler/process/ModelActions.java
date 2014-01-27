@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import net.simpleframework.workflow.modeler.ApplicationActions;
 import net.simpleframework.workflow.modeler.ApplicationActions.ApplicationAction;
 import net.simpleframework.workflow.schema.EndNode;
+import net.simpleframework.workflow.schema.MergeNode;
 import net.simpleframework.workflow.schema.StartNode;
 import net.simpleframework.workflow.schema.SubNode;
 import net.simpleframework.workflow.schema.UserNode;
@@ -67,6 +68,8 @@ public final class ModelActions {
 				final Class<?> nClass = ((CellValue) tCell.getValue()).getNodeClass();
 				if (UserNode.class.equals(nClass)) {
 					new UserNodeEditor(modelGraph, tCell);
+				} else if (MergeNode.class.equals(nClass)) {
+					new MergeNodeEditor(modelGraph, tCell);
 				} else if (SubNode.class.equals(nClass)) {
 					new SubNodeEditor(modelGraph, tCell);
 				} else if (StartNode.class.equals(nClass)) {

@@ -21,6 +21,7 @@ import net.simpleframework.common.StringUtils;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 import net.simpleframework.workflow.schema.AbstractTaskNode;
 import net.simpleframework.workflow.schema.EndNode;
+import net.simpleframework.workflow.schema.MergeNode;
 import net.simpleframework.workflow.schema.Node;
 import net.simpleframework.workflow.schema.ProcessNode;
 import net.simpleframework.workflow.schema.StartNode;
@@ -305,6 +306,8 @@ public class ModelGraph extends mxGraphComponent {
 					nodeClass = UserNode.class;
 				} else if (tb.sub.isSelected()) {
 					nodeClass = SubNode.class;
+				} else if (tb.merge.isSelected()) {
+					nodeClass = MergeNode.class;
 				}
 				if (nodeClass != null) {
 					graph.addCell(new TaskCell((AbstractTaskNode) getProcessNode().addNode(nodeClass),

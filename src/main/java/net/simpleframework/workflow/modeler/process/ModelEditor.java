@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.JCheckBox;
@@ -18,7 +19,7 @@ import net.simpleframework.common.Version;
 import net.simpleframework.common.coll.KVMap;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 import net.simpleframework.workflow.schema.AbstractParticipantType;
-import net.simpleframework.workflow.schema.AbstractParticipantType.Role;
+import net.simpleframework.workflow.schema.AbstractParticipantType.BaseRole;
 import net.simpleframework.workflow.schema.AbstractParticipantType.User;
 import net.simpleframework.workflow.schema.AbstractProcessStartupType;
 import net.simpleframework.workflow.schema.AbstractProcessStartupType.Email;
@@ -32,14 +33,13 @@ import net.simpleframework.workflow.schema.ProcessNode;
  * @author 陈侃(cknet@126.com, 13910090885) https://github.com/simpleframework
  *         http://www.simpleframework.net
  */
-@SuppressWarnings("serial")
 public class ModelEditor extends AbstractEditorDialog {
 
 	private static final Vector<String> startupTypes = new Vector<String>(Arrays.asList(
 			$m("AbstractProcessStartupType.Manual"), $m("AbstractProcessStartupType.Email")));
 
 	private static final Vector<String> participantTypes = new Vector<String>(Arrays.asList(
-			$m("AbstractParticipantType.Role"), $m("AbstractParticipantType.User")));
+			$m("AbstractParticipantType.BaseRole"), $m("AbstractParticipantType.User")));
 
 	protected ListenerPane listenerPane;
 
@@ -162,7 +162,7 @@ public class ModelEditor extends AbstractEditorDialog {
 			processNode.setStartupType(m);
 			final int j = participantTypeCb.getSelectedIndex();
 			if (j == 0) {
-				final Role r = new Role(null, m);
+				final BaseRole r = new BaseRole(null, m);
 				r.setParticipant(participantTf.getText());
 				m.setParticipantType(r);
 			} else if (j == 1) {
@@ -178,10 +178,12 @@ public class ModelEditor extends AbstractEditorDialog {
 	}
 
 	@Override
-	protected KVMap getTabbedComponents() {
+	protected Map<String, Object> getTabbedComponents() {
 		final Node node = getNode();
 		return new KVMap().add($m("ModelEditor.1"), createBasePane())
 				.add(VariablePane.title, createVariablePane(node))
 				.add(ListenerPane.title, listenerPane = new ListenerPane(node));
 	}
+
+	private static final long serialVersionUID = -5206704097540939803L;
 }

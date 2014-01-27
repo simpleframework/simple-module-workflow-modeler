@@ -5,6 +5,7 @@ import static net.simpleframework.common.I18n.$m;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -30,8 +31,8 @@ import net.simpleframework.workflow.schema.TransitionNode;
  * @author 陈侃(cknet@126.com, 13910090885) https://github.com/simpleframework
  *         http://www.simpleframework.net
  */
-@SuppressWarnings("serial")
 public class TransitionEditor extends AbstractEditorDialog {
+
 	private static final Vector<String> transitionTypes = new Vector<String>(Arrays.asList(
 			$m("AbstractTransitionType.Conditional"), $m("AbstractTransitionType.LogicConditional"),
 			$m("AbstractTransitionType.Interface")));
@@ -145,7 +146,9 @@ public class TransitionEditor extends AbstractEditorDialog {
 	}
 
 	@Override
-	protected KVMap getTabbedComponents() {
+	protected Map<String, Object> getTabbedComponents() {
 		return new KVMap().add($m("TransitionEditor.1"), createBasePane());
 	}
+
+	private static final long serialVersionUID = -383432659276929591L;
 }

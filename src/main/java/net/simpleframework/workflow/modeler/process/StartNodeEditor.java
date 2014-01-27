@@ -1,7 +1,8 @@
 package net.simpleframework.workflow.modeler.process;
 
 import static net.simpleframework.common.I18n.$m;
-import net.simpleframework.common.coll.KVMap;
+
+import java.util.Map;
 
 /**
  * Licensed under the Apache License, Version 2.0
@@ -9,7 +10,6 @@ import net.simpleframework.common.coll.KVMap;
  * @author 陈侃(cknet@126.com, 13910090885) https://github.com/simpleframework
  *         http://www.simpleframework.net
  */
-@SuppressWarnings("serial")
 public class StartNodeEditor extends AbstractEditorDialog {
 
 	public StartNodeEditor(final ModelGraph modelGraph, final TaskCell cell) {
@@ -17,7 +17,9 @@ public class StartNodeEditor extends AbstractEditorDialog {
 	}
 
 	@Override
-	protected KVMap getTabbedComponents() {
+	protected Map<String, Object> getTabbedComponents() {
 		return null;
 	}
+
+	private static final long serialVersionUID = -602721048000349300L;
 }

@@ -17,7 +17,7 @@ import net.simpleframework.workflow.modeler.utils.SwingUtils;
 @SuppressWarnings("serial")
 public class ModelGraphToolbar extends JToolBarEx {
 
-	JToggleButton normal, user, b4, sub, b6, b7;
+	JToggleButton normal, user, b4, sub, merge, b7;
 
 	public ModelGraphToolbar(final ModelGraph modelGraph) {
 		super(modelGraph);
@@ -38,10 +38,10 @@ public class ModelGraphToolbar extends JToolBarEx {
 		sub = new JToggleButton(SwingUtils.loadIcon("model_sub.gif"));
 		b4 = new JToggleButton(SwingUtils.loadIcon("model_auto.png"));
 
-		b6 = new JToggleButton(SwingUtils.loadIcon("model_merge.gif"));
+		merge = new JToggleButton(SwingUtils.loadIcon("model_merge.gif"));
 		b7 = new JToggleButton(SwingUtils.loadIcon("text.gif"));
 		final ButtonGroup bg = new ButtonGroup();
-		for (final JToggleButton btn : Arrays.asList(normal, user, sub, b4, b6, b7)) {
+		for (final JToggleButton btn : Arrays.asList(normal, user, sub, b4, merge, b7)) {
 			bg.add(btn);
 		}
 
@@ -51,7 +51,7 @@ public class ModelGraphToolbar extends JToolBarEx {
 		add(user);
 		add(sub);
 		add(b4);
-		add(b6);
+		add(merge);
 		add(b7);
 	}
 }

@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.BorderFactory;
@@ -35,7 +36,6 @@ import com.mxgraph.model.mxCell;
  * @author 陈侃(cknet@126.com, 13910090885) https://github.com/simpleframework
  *         http://www.simpleframework.net
  */
-@SuppressWarnings("serial")
 public class SubNodeEditor extends AbstractEditorDialog {
 
 	private JTextField urlTf, modelTf;
@@ -60,10 +60,13 @@ public class SubNodeEditor extends AbstractEditorDialog {
 		final JPanel p2 = new JPanel(new BorderLayout());
 		p2.setBorder(SwingUtils.createTitleBorder("变量映射"));
 		tableEx = new JTableEx(new ColumnEx("主流程变量"), new ColumnEx("子流程变量")) {
+
 			@Override
 			public boolean isCellEditable(final int row, final int column) {
 				return true;
 			}
+
+			private static final long serialVersionUID = -3647643723183036148L;
 		};
 
 		final JScrollPane sp = new JScrollPane(tableEx);
@@ -141,7 +144,9 @@ public class SubNodeEditor extends AbstractEditorDialog {
 	}
 
 	@Override
-	protected KVMap getTabbedComponents() {
+	protected Map<String, Object> getTabbedComponents() {
 		return new KVMap().add($m("SubNodeEditor.1"), createBasePane());
 	}
+
+	private static final long serialVersionUID = -7958514524267240825L;
 }

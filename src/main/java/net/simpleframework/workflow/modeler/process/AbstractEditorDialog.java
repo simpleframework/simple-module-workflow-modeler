@@ -18,7 +18,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import net.simpleframework.common.coll.KVMap;
 import net.simpleframework.workflow.modeler.utils.OkCancelDialog;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 import net.simpleframework.workflow.schema.Node;
@@ -107,12 +106,12 @@ public abstract class AbstractEditorDialog extends OkCancelDialog {
 		return (variablePane = new VariablePane(variableNode));
 	}
 
-	protected abstract KVMap getTabbedComponents();
+	protected abstract Map<String, Object> getTabbedComponents();
 
 	@Override
 	protected Component createContentUI() {
 		final JTabbedPane tabbedPane = new JTabbedPane();
-		final KVMap tabs = getTabbedComponents();
+		final Map<String, Object> tabs = getTabbedComponents();
 		if (tabs != null) {
 			for (final Map.Entry<String, Object> tab : tabs.entrySet()) {
 				tabbedPane.add(tab.getKey(), (Component) tab.getValue());

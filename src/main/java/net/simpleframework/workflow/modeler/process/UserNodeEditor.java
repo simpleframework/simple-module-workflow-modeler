@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.JCheckBox;
@@ -33,11 +34,10 @@ import net.simpleframework.workflow.schema.UserNode.RuleRole;
  * @author 陈侃(cknet@126.com, 13910090885) https://github.com/simpleframework
  *         http://www.simpleframework.net
  */
-@SuppressWarnings("serial")
 public class UserNodeEditor extends AbstractEditorDialog {
 
 	private static final Vector<String> participantTypes = new Vector<String>(Arrays.asList(
-			$m("AbstractParticipantType.Role"), $m("AbstractParticipantType.RelativeRole"),
+			$m("AbstractParticipantType.BaseRole"), $m("AbstractParticipantType.RelativeRole"),
 			$m("AbstractParticipantType.User"), $m("AbstractParticipantType.RuleRole")));
 
 	public UserNodeEditor(final ModelGraph modelGraph, final TaskCell cell) {
@@ -227,10 +227,12 @@ public class UserNodeEditor extends AbstractEditorDialog {
 	}
 
 	@Override
-	protected KVMap getTabbedComponents() {
+	protected Map<String, Object> getTabbedComponents() {
 		final Node node = getNode();
 		return new KVMap().add($m("UserNodeEditor.15"), createBasePane())
 				.add(VariablePane.title, createVariablePane(node))
 				.add(ListenerPane.title, listenerPane = new ListenerPane(node));
 	}
+
+	private static final long serialVersionUID = -8319883496562763808L;
 }
