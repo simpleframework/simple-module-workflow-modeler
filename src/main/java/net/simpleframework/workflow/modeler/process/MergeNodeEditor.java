@@ -5,9 +5,14 @@ import static net.simpleframework.common.I18n.$m;
 import java.awt.BorderLayout;
 import java.util.Map;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
+import net.simpleframework.common.Convert;
 import net.simpleframework.common.coll.KVMap;
+import net.simpleframework.workflow.modeler.utils.SwingUtils;
+import net.simpleframework.workflow.schema.MergeNode;
 
 /**
  * Licensed under the Apache License, Version 2.0
@@ -21,14 +26,29 @@ public class MergeNodeEditor extends AbstractEditorDialog {
 		super($m("MergeNodeEditor.0"), modelGraph, cell);
 	}
 
-	@Override
-	protected void load() {
-		super.load();
-	}
+	private JTextField countTf;
 
 	private JPanel createBasePane() {
 		final JPanel p1 = new JPanel(new BorderLayout());
-		return p1;
+		p1.setBorder(SwingUtils.createTitleBorder($m("MergeNodeEditor.2")));
+		p1.add(SwingUtils.createKV(new JLabel($m("MergeNodeEditor.3")), countTf = new JTextField()));
+
+		return SwingUtils.createVertical(p1);
+	}
+
+	@Override
+	protected void initComponents() {
+		super.initComponents();
+
+		final MergeNode node = (MergeNode) getNode();
+		countTf.setText(String.valueOf(node.getCount()));
+	}
+
+	@Override
+	public void ok() {
+		final MergeNode node = (MergeNode) getNode();
+		node.setCount(Convert.toInt(countTf.getText()));
+		super.ok();
 	}
 
 	@Override

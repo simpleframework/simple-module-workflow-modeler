@@ -47,7 +47,7 @@ public abstract class AbstractEditorDialog extends OkCancelDialog {
 	protected void createUI() {
 		setMinimumSize(new Dimension(420, 500));
 		super.createUI();
-		load();
+		initComponents();
 	}
 
 	private ProcessDocument nDocument;
@@ -66,7 +66,7 @@ public abstract class AbstractEditorDialog extends OkCancelDialog {
 		}
 	}
 
-	protected void load() {
+	protected void initComponents() {
 		final Node node = getNode();
 		if (descriptionPane != null) {
 			if (descriptionPane.text != null) {

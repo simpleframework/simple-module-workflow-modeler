@@ -101,8 +101,8 @@ public class SubNodeEditor extends AbstractEditorDialog {
 	}
 
 	@Override
-	protected void load() {
-		super.load();
+	protected void initComponents() {
+		super.initComponents();
 
 		final SubNode node = (SubNode) getNode();
 		urlTf.setText(node.getUrl());

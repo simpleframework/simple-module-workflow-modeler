@@ -105,8 +105,8 @@ public class TransitionEditor extends AbstractEditorDialog {
 	}
 
 	@Override
-	protected void load() {
-		super.load();
+	protected void initComponents() {
+		super.initComponents();
 
 		final TransitionNode transition = (TransitionNode) getNode();
 		final AbstractTransitionType tt = transition.getTransitionType();

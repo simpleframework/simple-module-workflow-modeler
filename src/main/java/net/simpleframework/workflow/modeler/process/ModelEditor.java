@@ -130,8 +130,8 @@ public class ModelEditor extends AbstractEditorDialog {
 	}
 
 	@Override
-	protected void load() {
-		super.load();
+	protected void initComponents() {
+		super.initComponents();
 
 		final ProcessNode processNode = (ProcessNode) getNode();
 		nameTf.setText(processNode.getName());

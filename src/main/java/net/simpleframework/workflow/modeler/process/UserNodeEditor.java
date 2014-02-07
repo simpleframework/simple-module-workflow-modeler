@@ -154,8 +154,8 @@ public class UserNodeEditor extends AbstractEditorDialog {
 	}
 
 	@Override
-	protected void load() {
-		super.load();
+	protected void initComponents() {
+		super.initComponents();
 
 		final UserNode node = (UserNode) getNode();
 		nameTf.setText(node.getName());
@@ -233,6 +233,6 @@ public class UserNodeEditor extends AbstractEditorDialog {
 				.add(VariablePane.title, createVariablePane(node))
 				.add(ListenerPane.title, listenerPane = new ListenerPane(node));
 	}
-	
+
 	private static final long serialVersionUID = -8319883496562763808L;
 }
