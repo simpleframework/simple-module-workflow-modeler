@@ -233,6 +233,6 @@ public class UserNodeEditor extends AbstractEditorDialog {
 				.add(VariablePane.title, createVariablePane(node))
 				.add(ListenerPane.title, listenerPane = new ListenerPane(node));
 	}
-
+	
 	private static final long serialVersionUID = -8319883496562763808L;
 }
