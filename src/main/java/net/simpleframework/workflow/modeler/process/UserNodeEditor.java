@@ -182,7 +182,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		final UserNode node = (UserNode) getNode();
 		final String name = nameTf.getText();
 		if (StringUtils.hasText(name)) {
-			for (final Node node2 : ((ProcessNode) node.parent()).nodes()) {
+			for (final Node node2 : ((ProcessNode) node.getParent()).nodes()) {
 				if (node != node2 && name.equals(node2.getName())) {
 					SwingUtils.showError($m("UserNodeEditor.14", name));
 					return;
