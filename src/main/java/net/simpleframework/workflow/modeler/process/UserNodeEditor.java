@@ -5,7 +5,6 @@ import static net.simpleframework.common.I18n.$m;
 import java.awt.BorderLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Vector;
 
@@ -16,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import net.simpleframework.common.StringUtils;
+import net.simpleframework.common.coll.ArrayUtils;
 import net.simpleframework.common.coll.KVMap;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 import net.simpleframework.workflow.schema.AbstractParticipantType;
@@ -36,9 +36,9 @@ import net.simpleframework.workflow.schema.UserNode.RuleRole;
  */
 public class UserNodeEditor extends AbstractEditorDialog {
 
-	private static final Vector<String> participantTypes = new Vector<String>(Arrays.asList(
+	private static final Vector<String> participantTypes = ArrayUtils.asVector(
 			$m("AbstractParticipantType.BaseRole"), $m("AbstractParticipantType.RelativeRole"),
-			$m("AbstractParticipantType.User"), $m("AbstractParticipantType.RuleRole")));
+			$m("AbstractParticipantType.User"), $m("AbstractParticipantType.RuleRole"));
 
 	public UserNodeEditor(final ModelGraph modelGraph, final TaskCell cell) {
 		super($m("UserNodeEditor.0"), modelGraph, cell);

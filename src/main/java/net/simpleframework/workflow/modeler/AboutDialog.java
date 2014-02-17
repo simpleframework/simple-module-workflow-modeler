@@ -9,7 +9,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -25,6 +24,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import net.simpleframework.common.coll.ArrayUtils;
 import net.simpleframework.workflow.modeler.utils.EnhancedDialog;
 import net.simpleframework.workflow.modeler.utils.SplashScreen;
 
@@ -141,12 +141,11 @@ public class AboutDialog extends EnhancedDialog {
 		final Iterator<Entry<Object, Object>> it = sets.iterator();
 		while (it.hasNext()) {
 			final Entry<Object, Object> entry = it.next();
-			final Vector<Object> row = new Vector<Object>(Arrays.asList(entry.getKey(),
-					entry.getValue()));
+			final Vector<Object> row = ArrayUtils.asVector(entry.getKey(), entry.getValue());
 			data.add(row);
 		}
-		final DefaultTableModel tm = new DefaultTableModel(data, new Vector<String>(Arrays.asList(
-				$m("AboutDialog.2"), $m("AboutDialog.3")))) {
+		final DefaultTableModel tm = new DefaultTableModel(data, ArrayUtils.asVector(
+				$m("AboutDialog.2"), $m("AboutDialog.3"))) {
 
 			@Override
 			public boolean isCellEditable(final int row, final int column) {

@@ -4,7 +4,6 @@ import static net.simpleframework.common.I18n.$m;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Vector;
 
@@ -16,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import net.simpleframework.common.coll.ArrayUtils;
 import net.simpleframework.common.coll.KVMap;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 import net.simpleframework.workflow.schema.AbstractTransitionType;
@@ -33,9 +33,9 @@ import net.simpleframework.workflow.schema.TransitionNode;
  */
 public class TransitionEditor extends AbstractEditorDialog {
 
-	private static final Vector<String> transitionTypes = new Vector<String>(Arrays.asList(
+	private static final Vector<String> transitionTypes = ArrayUtils.asVector(
 			$m("AbstractTransitionType.Conditional"), $m("AbstractTransitionType.LogicConditional"),
-			$m("AbstractTransitionType.Interface")));
+			$m("AbstractTransitionType.Interface"));
 
 	public TransitionEditor(final ModelGraph modelGraph, final TransitionCell cell) {
 		super($m("TransitionEditor.0"), modelGraph, cell);

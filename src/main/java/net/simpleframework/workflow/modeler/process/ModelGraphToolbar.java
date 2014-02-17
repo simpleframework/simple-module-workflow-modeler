@@ -1,10 +1,9 @@
 package net.simpleframework.workflow.modeler.process;
 
-import java.util.Arrays;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JToggleButton;
 
+import net.simpleframework.common.coll.ArrayUtils;
 import net.simpleframework.workflow.modeler.utils.JToolBarEx;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 
@@ -41,7 +40,7 @@ public class ModelGraphToolbar extends JToolBarEx {
 		merge = new JToggleButton(SwingUtils.loadIcon("model_merge.gif"));
 		b7 = new JToggleButton(SwingUtils.loadIcon("text.gif"));
 		final ButtonGroup bg = new ButtonGroup();
-		for (final JToggleButton btn : Arrays.asList(normal, user, sub, b4, merge, b7)) {
+		for (final JToggleButton btn : ArrayUtils.asList(normal, user, sub, b4, merge, b7)) {
 			bg.add(btn);
 		}
 

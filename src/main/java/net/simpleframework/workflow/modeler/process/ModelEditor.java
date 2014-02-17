@@ -5,7 +5,6 @@ import static net.simpleframework.common.I18n.$m;
 import java.awt.BorderLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Vector;
 
@@ -16,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import net.simpleframework.common.Version;
+import net.simpleframework.common.coll.ArrayUtils;
 import net.simpleframework.common.coll.KVMap;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 import net.simpleframework.workflow.schema.AbstractParticipantType;
@@ -36,11 +36,11 @@ import net.simpleframework.workflow.schema.ProcessNode;
 
 public class ModelEditor extends AbstractEditorDialog {
 
-	private static final Vector<String> startupTypes = new Vector<String>(Arrays.asList(
-			$m("AbstractProcessStartupType.Manual"), $m("AbstractProcessStartupType.Email")));
+	private static final Vector<String> startupTypes = ArrayUtils.asVector(
+			$m("AbstractProcessStartupType.Manual"), $m("AbstractProcessStartupType.Email"));
 
-	private static final Vector<String> participantTypes = new Vector<String>(Arrays.asList(
-			$m("AbstractParticipantType.BaseRole"), $m("AbstractParticipantType.User")));
+	private static final Vector<String> participantTypes = ArrayUtils.asVector(
+			$m("AbstractParticipantType.BaseRole"), $m("AbstractParticipantType.User"));
 
 	protected ListenerPane listenerPane;
 
