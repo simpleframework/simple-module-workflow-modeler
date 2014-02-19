@@ -22,7 +22,7 @@ import net.simpleframework.common.StringUtils;
  */
 @SuppressWarnings("serial")
 public abstract class SplashScreen extends JWindow {
-	public static Icon splashIcon = SwingUtils.loadIcon("splash.png");
+	public static Icon splashIcon = SwingUtils.loadIcon("splash.jpg");
 
 	public final static int SPLASH_IMAGE_BACKGROUND = 0xFFFFFF; // 0;
 

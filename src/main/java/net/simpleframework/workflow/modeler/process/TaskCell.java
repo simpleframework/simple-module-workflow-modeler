@@ -4,7 +4,9 @@ import net.simpleframework.common.StringUtils;
 import net.simpleframework.workflow.modeler.Application;
 import net.simpleframework.workflow.schema.AbstractTaskNode;
 import net.simpleframework.workflow.schema.EndNode;
+import net.simpleframework.workflow.schema.MergeNode;
 import net.simpleframework.workflow.schema.StartNode;
+import net.simpleframework.workflow.schema.SubNode;
 import net.simpleframework.workflow.schema.UserNode;
 
 import com.mxgraph.model.mxCell;
@@ -24,7 +26,7 @@ public class TaskCell extends mxCell {
 		setConnectable(true);
 		setValue(new CellValue(taskNode));
 
-		final mxGeometry geometry = new mxGeometry(x, y, 32, 32);
+		final mxGeometry geometry = new mxGeometry(x, y, 38, 38);
 		setGeometry(geometry);
 
 		final StringBuilder sb = new StringBuilder();
@@ -35,11 +37,15 @@ public class TaskCell extends mxCell {
 				.append(StringUtils.replace(Application.class.getPackage().getName(), ".", "/"))
 				.append("/images/");
 		if (taskNode instanceof UserNode) {
-			sb.append("node_user.gif");
+			sb.append("node_user.png");
+		} else if (taskNode instanceof MergeNode) {
+			sb.append("node_merge.png");
+		} else if (taskNode instanceof SubNode) {
+			sb.append("node_sub.png");
 		} else if (taskNode instanceof StartNode) {
-			sb.append("node_start.gif");
+			sb.append("node_start.png");
 		} else if (taskNode instanceof EndNode) {
-			sb.append("node_end.gif");
+			sb.append("node_end.png");
 		} else {
 			sb.append("node_auto.gif");
 		}
