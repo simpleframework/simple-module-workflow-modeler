@@ -1,7 +1,7 @@
 package net.simpleframework.workflow.modeler.process;
 
 import net.simpleframework.common.StringUtils;
-import net.simpleframework.workflow.modeler.Application;
+import net.simpleframework.workflow.IWorkflowHandler;
 import net.simpleframework.workflow.schema.AbstractTaskNode;
 import net.simpleframework.workflow.schema.EndNode;
 import net.simpleframework.workflow.schema.MergeNode;
@@ -34,8 +34,8 @@ public class TaskCell extends mxCell {
 		sb.append("verticalLabelPosition=bottom;spacingBottom=6;");
 		sb.append("resizable=0;editable=0;autosize=1;");
 		sb.append("image=/")
-				.append(StringUtils.replace(Application.class.getPackage().getName(), ".", "/"))
-				.append("/images/");
+				.append(StringUtils.replace(IWorkflowHandler.class.getPackage().getName(), ".", "/"))
+				.append("/$resource/images/");
 		if (taskNode instanceof UserNode) {
 			sb.append("node_user.png");
 		} else if (taskNode instanceof MergeNode) {
