@@ -31,8 +31,8 @@ public class TransitionCell extends mxCell {
 		setGeometry(geometry);
 
 		final StringBuilder sb = new StringBuilder();
-		sb.append("edgeStyle=mxEdgeStyle.EntityRelation;");
-		sb.append("editable=0;");
+		// sb.append("edgeStyle=mxEdgeStyle.EntityRelation;");
+		sb.append("editable=0");
 		setStyle(sb.toString());
 	}
 

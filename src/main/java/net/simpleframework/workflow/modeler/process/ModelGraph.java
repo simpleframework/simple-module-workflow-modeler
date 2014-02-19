@@ -33,11 +33,15 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.handler.mxConnectPreview;
+import com.mxgraph.swing.handler.mxKeyboardHandler;
+import com.mxgraph.swing.handler.mxRubberband;
+import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxPoint;
 import com.mxgraph.view.mxCellState;
+import com.mxgraph.view.mxEdgeStyle;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxMultiplicity;
 
@@ -53,11 +57,18 @@ public class ModelGraph extends mxGraphComponent {
 
 	private final ModelTabbedContent tabbedContent;
 
+	protected mxKeyboardHandler keyboardHandler;
+
 	public ModelGraph(final ModelTabbedContent tabbedContent) {
 		super(new mxGraph());
 		this.tabbedContent = tabbedContent;
 
 		setBorder(BorderFactory.createEmptyBorder());
+
+		new mxRubberband(this); // 创建框线选择
+
+		// keyboardHandler = new mxKeyboardHandler(this); // 创建键盘handler
+
 		final JViewport jv = getViewport();
 		jv.setOpaque(true);
 		jv.setBackground(Color.WHITE);
@@ -67,7 +78,6 @@ public class ModelGraph extends mxGraphComponent {
 		final mxGraphControl gc = getGraphControl();
 		gc.setBorder(BorderFactory.createEtchedBorder());
 		gc.addMouseListener(new MouseAdapter() {
-
 			@Override
 			public void mouseReleased(final MouseEvent e) {
 				processModelMouseReleased(e);
@@ -161,6 +171,12 @@ public class ModelGraph extends mxGraphComponent {
 	}
 
 	void initData() {
+		// 装载缺省的style
+		final Map<String, Object> style = graph.getStylesheet().getDefaultEdgeStyle();
+		style.put(mxConstants.STYLE_EDGE, mxEdgeStyle.EntityRelation);
+		style.put(mxConstants.STYLE_ROUNDED, true);
+		style.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_OPEN);
+
 		final Map<String, TaskCell> taskCells = new HashMap<String, TaskCell>();
 		final Collection<Node> nodes = getProcessNode().nodes();
 		for (final Node node : nodes) {
@@ -242,8 +258,8 @@ public class ModelGraph extends mxGraphComponent {
 	}
 
 	private void initGraph() {
-		graph.setAllowDanglingEdges(false);
-		graph.setMultigraph(false);
+		graph.setAllowDanglingEdges(false); // 不允许空边
+		graph.setMultigraph(false); // 不允许多个连接
 
 		final mxMultiplicity startNodeValidation = new mxMultiplicity(false, null, null, null, 0,
 				"0", null, $m("ModelGraph.0"), null, true) {
