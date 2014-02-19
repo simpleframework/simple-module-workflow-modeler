@@ -78,6 +78,11 @@ public class Application extends ObjectEx {
 				defaults.put(key, defautFont);
 			}
 		}
+		// try {
+		// UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		// } catch (final Exception e) {
+		// e.printStackTrace();
+		// }
 	}
 
 	public static boolean isError(final Map<String, Object> kv) {
