@@ -6,19 +6,16 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPopupMenu;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
-import net.simpleframework.common.Convert;
 import net.simpleframework.common.StringUtils;
 import net.simpleframework.workflow.graph.CellValue;
+import net.simpleframework.workflow.graph.GraphUtils;
 import net.simpleframework.workflow.graph.TaskCell;
 import net.simpleframework.workflow.graph.TransitionCell;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
@@ -38,13 +35,11 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.handler.mxConnectPreview;
 import com.mxgraph.swing.handler.mxKeyboardHandler;
 import com.mxgraph.swing.handler.mxRubberband;
-import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxPoint;
 import com.mxgraph.view.mxCellState;
-import com.mxgraph.view.mxEdgeStyle;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxMultiplicity;
 
@@ -63,7 +58,8 @@ public class ModelGraph extends mxGraphComponent {
 	protected mxKeyboardHandler keyboardHandler;
 
 	public ModelGraph(final ModelTabbedContent tabbedContent) {
-		super(new mxGraph());
+		super(GraphUtils.createGraph(tabbedContent.getDocument()));
+
 		this.tabbedContent = tabbedContent;
 
 		setBorder(BorderFactory.createEmptyBorder());
@@ -86,8 +82,6 @@ public class ModelGraph extends mxGraphComponent {
 				processModelMouseReleased(e);
 			}
 		});
-
-		initData();
 
 		getConnectionHandler().setConnectPreview(new mxConnectPreview(this) {
 			@Override
@@ -171,63 +165,6 @@ public class ModelGraph extends mxGraphComponent {
 
 	private ProcessNode getProcessNode() {
 		return tabbedContent.getDocument().getProcessNode();
-	}
-
-	void initData() {
-		// 装载缺省的style
-		final Map<String, Object> style = graph.getStylesheet().getDefaultEdgeStyle();
-		style.put(mxConstants.STYLE_EDGE, mxEdgeStyle.EntityRelation);
-		style.put(mxConstants.STYLE_ROUNDED, true);
-		style.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_OPEN);
-
-		final Map<String, TaskCell> taskCells = new HashMap<String, TaskCell>();
-		final Collection<Node> nodes = getProcessNode().nodes();
-		for (final Node node : nodes) {
-			if (node instanceof AbstractTaskNode) {
-				double x = node.getDoubleProperty("x");
-				double y = node.getDoubleProperty("y");
-				if (node instanceof StartNode) {
-					x = x == 0 ? 20 : x;
-					y = y == 0 ? 200 : y;
-				} else if (node instanceof EndNode) {
-					x = x == 0 ? 500 : x;
-					y = y == 0 ? 200 : y;
-				}
-				final TaskCell tc = new TaskCell((AbstractTaskNode) node, x, y);
-				taskCells.put(tc.getId(), tc);
-				graph.addCell(tc);
-			}
-		}
-
-		for (final Node node : nodes) {
-			if (node instanceof TransitionNode) {
-				final TransitionNode transition = (TransitionNode) node;
-
-				final double x = node.getDoubleProperty("x");
-				final double y = node.getDoubleProperty("y");
-				final double offsetX = transition.getDoubleProperty("offset-x");
-				final double offsetY = transition.getDoubleProperty("offset-y");
-
-				List<mxPoint> points = null;
-				final String pointsStr = transition.getProperty("points");
-				if (StringUtils.hasText(pointsStr)) {
-					points = new ArrayList<mxPoint>();
-					for (final String pointStr : StringUtils.split(pointsStr, ";")) {
-						final String[] arr = StringUtils.split(pointStr, ",");
-						if (arr != null && arr.length == 2) {
-							final mxPoint point = new mxPoint(Convert.toDouble(arr[0], 0),
-									Convert.toDouble(arr[1], 0));
-							points.add(point);
-						}
-					}
-				}
-
-				final TransitionCell cell = new TransitionCell((TransitionNode) node, x, y, points,
-						new mxPoint(offsetX, offsetY));
-				graph.addEdge(cell, null, taskCells.get(transition.getFrom()),
-						taskCells.get(transition.getTo()), null);
-			}
-		}
 	}
 
 	public void save() {
