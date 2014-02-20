@@ -5,12 +5,10 @@ import static net.simpleframework.common.I18n.$m;
 import java.awt.Cursor;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Map;
 
-import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Icon;
@@ -18,17 +16,14 @@ import javax.swing.JFileChooser;
 
 import net.simpleframework.common.StringUtils;
 import net.simpleframework.common.coll.ArrayUtils;
+import net.simpleframework.workflow.graph.GraphUtils;
 import net.simpleframework.workflow.modeler.utils.ITabbedContent;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 
-import com.mxgraph.canvas.mxICanvas;
-import com.mxgraph.canvas.mxSvgCanvas;
-import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxCellRenderer;
-import com.mxgraph.util.mxCellRenderer.CanvasFactory;
-import com.mxgraph.util.mxDomUtils;
 import com.mxgraph.util.mxUtils;
 import com.mxgraph.util.mxXmlUtils;
+import com.mxgraph.view.mxGraph;
 
 /**
  * Licensed under the Apache License, Version 2.0
@@ -124,33 +119,15 @@ public abstract class ApplicationActions {
 					filename += type;
 				}
 				try {
-
-					final mxGraphComponent gc = tc.getGraphComponent();
+					final mxGraph graph = tc.getGraphComponent().getGraph();
 					if (".svg".equals(type)) {
-						final mxSvgCanvas canvas = (mxSvgCanvas) mxCellRenderer.drawCells(gc.getGraph(),
-								null, 1, null, new CanvasFactory() {
-									@Override
-									public mxICanvas createCanvas(final int width, final int height) {
-										final mxSvgCanvas canvas = new mxSvgCanvas(mxDomUtils
-												.createSvgDocument(width, height)) {
-											@Override
-											public String getImageForStyle(final Map<String, Object> style) {
-												return super.getImageForStyle(style);
-											}
-										};
-										canvas.setEmbedded(true);
-										return canvas;
-									}
-								});
-						mxUtils.writeFile(mxXmlUtils.getXml(canvas.getDocument()), filename);
+						mxUtils.writeFile(GraphUtils.getEmbeddedSVG(graph), filename);
 					} else if (".png".equals(type)) {
-						final BufferedImage image = mxCellRenderer.createBufferedImage(gc.getGraph(),
-								null, 1, null, true, null, gc.getCanvas());
-						ImageIO.write(image, "PNG", new File(filename));
+						GraphUtils.writePNG(graph, new FileOutputStream(new File(filename)));
 					} else if (".html".equals(type)) {
 						mxUtils.writeFile(
-								mxXmlUtils.getXml(mxCellRenderer.createVmlDocument(gc.getGraph(), null, 1,
-										null, null).getDocumentElement()), filename);
+								mxXmlUtils.getXml(mxCellRenderer.createVmlDocument(graph, null, 1, null,
+										null).getDocumentElement()), filename);
 					}
 				} catch (final IOException e1) {
 					SwingUtils.showError(e1);
