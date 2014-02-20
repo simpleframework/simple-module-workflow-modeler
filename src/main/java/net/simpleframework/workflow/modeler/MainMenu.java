@@ -1,10 +1,13 @@
 package net.simpleframework.workflow.modeler;
 
+import static net.simpleframework.common.I18n.$m;
+
 import javax.swing.BorderFactory;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
 import net.simpleframework.workflow.modeler.ApplicationActions.AboutAction;
+import net.simpleframework.workflow.modeler.ApplicationActions.SaveAsAction;
 
 /**
  * Licensed under the Apache License, Version 2.0
@@ -17,11 +20,18 @@ public class MainMenu extends JMenuBar {
 		super();
 		setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		setBorderPainted(false);
+		add(createFileMenu());
 		add(createHelpMenu());
 	}
 
+	private JMenu createFileMenu() {
+		final JMenu menu = new JMenu($m("MainMenu.0") + "(F)");
+		menu.add(new SaveAsAction());
+		return menu;
+	}
+
 	private JMenu createHelpMenu() {
-		final JMenu menu = new JMenu("帮助(H)");
+		final JMenu menu = new JMenu($m("MainMenu.1") + "(H)");
 		// menu.setMnemonic('H');
 		// menu.add(new HomePageAction());
 		menu.addSeparator();

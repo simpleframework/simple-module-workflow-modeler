@@ -2,6 +2,8 @@ package net.simpleframework.workflow.modeler.utils;
 
 import javax.swing.JComponent;
 
+import com.mxgraph.swing.mxGraphComponent;
+
 /**
  * Licensed under the Apache License, Version 2.0
  * 
@@ -19,6 +21,8 @@ public interface ITabbedContent {
 	TreeNodeEx getTreeNode();
 
 	Object getUserObject();
+
+	mxGraphComponent getGraphComponent();
 
 	boolean isModify();
 

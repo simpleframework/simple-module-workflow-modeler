@@ -20,6 +20,8 @@ import net.simpleframework.workflow.modeler.utils.xmleditor.XMLEditorKit;
 import net.simpleframework.workflow.schema.ProcessDocument;
 import net.simpleframework.workflow.schema.ProcessNode;
 
+import com.mxgraph.swing.mxGraphComponent;
+
 /**
  * Licensed under the Apache License, Version 2.0
  * 
@@ -33,6 +35,8 @@ public class ModelTabbedContent extends TabbedContent {
 	private final NodeProcessModel nodeProcessModel;
 
 	private ProcessDocument document;
+
+	private ModelGraph modelGraph;
 
 	private ModelGraphToolbar toolbar;
 
@@ -48,7 +52,7 @@ public class ModelTabbedContent extends TabbedContent {
 
 			final JPanel tab1 = new JPanel(new BorderLayout());
 
-			final ModelGraph modelGraph = new ModelGraph(this);
+			modelGraph = new ModelGraph(this);
 			tab1.add(toolbar = new ModelGraphToolbar(modelGraph), BorderLayout.NORTH);
 			tab1.add(modelGraph);
 
@@ -96,5 +100,10 @@ public class ModelTabbedContent extends TabbedContent {
 
 	public ModelGraphToolbar getToolbar() {
 		return toolbar;
+	}
+
+	@Override
+	public mxGraphComponent getGraphComponent() {
+		return modelGraph;
 	}
 }

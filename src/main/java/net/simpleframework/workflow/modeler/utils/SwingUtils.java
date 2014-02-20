@@ -16,6 +16,7 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,11 +35,14 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.text.JTextComponent;
 
 import net.simpleframework.common.ClassUtils;
+import net.simpleframework.common.FileUtils;
 import net.simpleframework.common.IoUtils;
+import net.simpleframework.common.StringUtils;
 import net.simpleframework.workflow.modeler.Application;
 
 /**
@@ -49,7 +53,7 @@ import net.simpleframework.workflow.modeler.Application;
  */
 public abstract class SwingUtils {
 
-	private static Window parent() {
+	public static Window parent() {
 		return (Window) Application.get().getMainPane();
 	}
 
@@ -77,6 +81,41 @@ public abstract class SwingUtils {
 		} catch (final IOException e) {
 		}
 		return null;
+	}
+
+	public static JFileChooser createJFileChooser(final String... fileFilters) {
+		final JFileChooser chooser = new JFileChooser();
+		chooser.removeChoosableFileFilter(chooser.getAcceptAllFileFilter());
+		for (final String fileFilter : fileFilters) {
+			final String[] fileFilterArr = StringUtils.split(fileFilter, "|");
+			chooser.addChoosableFileFilter(new FileFilter() {
+				@Override
+				public boolean accept(final File f) {
+					final String[] types = StringUtils.split(fileFilterArr[0], ";");
+					if ((types == null) || (types.length == 0)) {
+						return true;
+					} else {
+						if (!f.isFile()) {
+							return true;
+						} else {
+							final String ext = FileUtils.getFilenameExtension(f.getPath());
+							for (final String type : types) {
+								if (type.equalsIgnoreCase(ext)) {
+									return true;
+								}
+							}
+							return false;
+						}
+					}
+				}
+
+				@Override
+				public String getDescription() {
+					return fileFilterArr.length > 1 ? fileFilterArr[1] : fileFilterArr[0];
+				}
+			});
+		}
+		return chooser;
 	}
 
 	public static void showPopupMenu(final JPopupMenu popup, final Component component, int x, int y) {
