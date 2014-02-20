@@ -4,6 +4,9 @@ import static net.simpleframework.common.I18n.$m;
 
 import java.awt.event.ActionEvent;
 
+import net.simpleframework.workflow.graph.CellValue;
+import net.simpleframework.workflow.graph.TaskCell;
+import net.simpleframework.workflow.graph.TransitionCell;
 import net.simpleframework.workflow.modeler.ApplicationActions;
 import net.simpleframework.workflow.modeler.ApplicationActions.ApplicationAction;
 import net.simpleframework.workflow.schema.EndNode;

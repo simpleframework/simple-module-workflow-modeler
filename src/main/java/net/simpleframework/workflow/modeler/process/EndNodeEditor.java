@@ -4,6 +4,8 @@ import static net.simpleframework.common.I18n.$m;
 
 import java.util.Map;
 
+import net.simpleframework.workflow.graph.TaskCell;
+
 /**
  * Licensed under the Apache License, Version 2.0
  * 

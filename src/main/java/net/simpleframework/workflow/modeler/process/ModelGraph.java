@@ -18,6 +18,9 @@ import javax.swing.SwingUtilities;
 
 import net.simpleframework.common.Convert;
 import net.simpleframework.common.StringUtils;
+import net.simpleframework.workflow.graph.CellValue;
+import net.simpleframework.workflow.graph.TaskCell;
+import net.simpleframework.workflow.graph.TransitionCell;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 import net.simpleframework.workflow.schema.AbstractTaskNode;
 import net.simpleframework.workflow.schema.EndNode;

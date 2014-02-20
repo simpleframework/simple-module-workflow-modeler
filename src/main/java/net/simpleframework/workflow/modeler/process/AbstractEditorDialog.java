@@ -18,6 +18,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import net.simpleframework.workflow.graph.CellValue;
+import net.simpleframework.workflow.graph.TaskCell;
+import net.simpleframework.workflow.graph.TransitionCell;
 import net.simpleframework.workflow.modeler.utils.OkCancelDialog;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 import net.simpleframework.workflow.schema.Node;

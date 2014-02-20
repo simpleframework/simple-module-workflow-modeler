@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 
 import net.simpleframework.common.Convert;
 import net.simpleframework.common.coll.KVMap;
+import net.simpleframework.workflow.graph.TaskCell;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 import net.simpleframework.workflow.schema.MergeNode;
 

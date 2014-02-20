@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
@@ -110,7 +111,8 @@ public abstract class ApplicationActions {
 				SwingUtils.showError($m("SaveAsAction.1"));
 				return;
 			}
-			final String[] fileFilters = new String[] { "svg|SVG文件 (.svg)", "png|PNG文件 (.png)" };
+			final String[] fileFilters = new String[] { "svg|SVG文件 (.svg)", "png|PNG文件 (.png)",
+					"html|VML文件 (.html)" };
 			final JFileChooser chooser = SwingUtils.createJFileChooser(fileFilters);
 			if (chooser.showSaveDialog(mainPane) == JFileChooser.APPROVE_OPTION) {
 				final String type = "."
@@ -122,6 +124,7 @@ public abstract class ApplicationActions {
 					filename += type;
 				}
 				try {
+
 					final mxGraphComponent gc = tc.getGraphComponent();
 					if (".svg".equals(type)) {
 						final mxSvgCanvas canvas = (mxSvgCanvas) mxCellRenderer.drawCells(gc.getGraph(),
@@ -129,7 +132,12 @@ public abstract class ApplicationActions {
 									@Override
 									public mxICanvas createCanvas(final int width, final int height) {
 										final mxSvgCanvas canvas = new mxSvgCanvas(mxDomUtils
-												.createSvgDocument(width, height));
+												.createSvgDocument(width, height)) {
+											@Override
+											public String getImageForStyle(final Map<String, Object> style) {
+												return super.getImageForStyle(style);
+											}
+										};
 										canvas.setEmbedded(true);
 										return canvas;
 									}
@@ -139,6 +147,10 @@ public abstract class ApplicationActions {
 						final BufferedImage image = mxCellRenderer.createBufferedImage(gc.getGraph(),
 								null, 1, null, true, null, gc.getCanvas());
 						ImageIO.write(image, "PNG", new File(filename));
+					} else if (".html".equals(type)) {
+						mxUtils.writeFile(
+								mxXmlUtils.getXml(mxCellRenderer.createVmlDocument(gc.getGraph(), null, 1,
+										null, null).getDocumentElement()), filename);
 					}
 				} catch (final IOException e1) {
 					SwingUtils.showError(e1);

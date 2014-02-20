@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import net.simpleframework.common.StringUtils;
 import net.simpleframework.common.coll.ArrayUtils;
 import net.simpleframework.common.coll.KVMap;
+import net.simpleframework.workflow.graph.TaskCell;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 import net.simpleframework.workflow.schema.AbstractParticipantType;
 import net.simpleframework.workflow.schema.AbstractParticipantType.User;
