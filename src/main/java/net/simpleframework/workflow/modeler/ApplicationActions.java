@@ -20,7 +20,11 @@ import net.simpleframework.workflow.graph.GraphUtils;
 import net.simpleframework.workflow.modeler.utils.ITabbedContent;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 
+import com.mxgraph.canvas.mxICanvas;
+import com.mxgraph.canvas.mxSvgCanvas;
 import com.mxgraph.util.mxCellRenderer;
+import com.mxgraph.util.mxCellRenderer.CanvasFactory;
+import com.mxgraph.util.mxDomUtils;
 import com.mxgraph.util.mxUtils;
 import com.mxgraph.util.mxXmlUtils;
 import com.mxgraph.view.mxGraph;
@@ -121,7 +125,17 @@ public abstract class ApplicationActions {
 				try {
 					final mxGraph graph = tc.getGraphComponent().getGraph();
 					if (".svg".equals(type)) {
-						mxUtils.writeFile(GraphUtils.getEmbeddedSVG(graph), filename);
+						final mxSvgCanvas canvas = (mxSvgCanvas) mxCellRenderer.drawCells(graph, null, 1,
+								null, new CanvasFactory() {
+									@Override
+									public mxICanvas createCanvas(final int width, final int height) {
+										final mxSvgCanvas canvas = new mxSvgCanvas(mxDomUtils
+												.createSvgDocument(width, height));
+										canvas.setEmbedded(true);
+										return canvas;
+									}
+								});
+						mxUtils.writeFile(mxXmlUtils.getXml(canvas.getDocument()), filename);
 					} else if (".png".equals(type)) {
 						GraphUtils.writePNG(graph, new FileOutputStream(new File(filename)));
 					} else if (".html".equals(type)) {
