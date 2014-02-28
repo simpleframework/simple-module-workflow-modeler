@@ -90,7 +90,8 @@ public class ModelTabbedContent extends TabbedContent {
 	@Override
 	public String getTitle() {
 		final ProcessNode processNode = document.getProcessNode();
-		return StringUtils.text(processNode.getText(), processNode.getName());
+		final String txt = processNode.getText();
+		return StringUtils.hasText(txt) ? txt : processNode.getName();
 	}
 
 	@Override

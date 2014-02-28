@@ -46,7 +46,7 @@ public class TransitionEditor extends AbstractEditorDialog {
 
 	private JCheckBox manualCb;
 
-	private JTextField expressionTf, transitionIdTf, handleClassTf;
+	private JTextField expressionTf, transitionIdTf, handlerClassTf;
 
 	private JPanel p2, p3, p4, p5, p6;
 
@@ -61,7 +61,7 @@ public class TransitionEditor extends AbstractEditorDialog {
 				SwingUtils.createSelected(transitionIdTf = new JTextField(), new JButton()));
 		p5 = SwingUtils.createKV(new JLabel(), manualCb = new JCheckBox($m("TransitionEditor.6")));
 		p6 = SwingUtils.createKV(new JLabel($m("TransitionEditor.7")),
-				handleClassTf = new JTextField());
+				handlerClassTf = new JTextField());
 
 		transitionTypeCb.addItemListener(new ItemListener() {
 			@Override
@@ -84,7 +84,7 @@ public class TransitionEditor extends AbstractEditorDialog {
 			manualCb.setSelected(false);
 			logicCb.setSelectedIndex(0);
 			transitionIdTf.setText(null);
-			handleClassTf.setText(null);
+			handlerClassTf.setText(null);
 		} else if (tt instanceof Conditional) {
 			final Conditional c = (Conditional) tt;
 			expressionTf.setText(c.getExpression());
@@ -95,7 +95,7 @@ public class TransitionEditor extends AbstractEditorDialog {
 			transitionIdTf.setText(lc.getTransitionId());
 			manualCb.setSelected(lc.isManual());
 		} else if (tt instanceof Interface) {
-			handleClassTf.setText(((Interface) tt).getHandleClass());
+			handlerClassTf.setText(((Interface) tt).getHandlerClass());
 		}
 		final int i = transitionTypeCb.getSelectedIndex();
 		p2.setVisible(i == 0);
@@ -140,7 +140,7 @@ public class TransitionEditor extends AbstractEditorDialog {
 		} else if (i == 2) {
 			final Interface intr = new Interface(null, transition);
 			transition.setTransitionType(intr);
-			intr.setHandleClass(handleClassTf.getText());
+			intr.setHandlerClass(handlerClassTf.getText());
 		}
 
 		super.ok();
