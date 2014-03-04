@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import net.simpleframework.common.Convert;
 import net.simpleframework.common.coll.KVMap;
 import net.simpleframework.workflow.graph.TaskCell;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
@@ -48,7 +47,7 @@ public class MergeNodeEditor extends AbstractEditorDialog {
 	@Override
 	public void ok() {
 		final MergeNode node = (MergeNode) getNode();
-		node.setCount(Convert.toInt(countTf.getText()));
+		node.setCount(countTf.getText());
 		super.ok();
 	}
 

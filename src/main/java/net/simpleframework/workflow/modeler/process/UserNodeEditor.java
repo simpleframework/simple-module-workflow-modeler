@@ -45,7 +45,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		super($m("UserNodeEditor.0"), modelGraph, cell);
 	}
 
-	private JTextField nameTf, formClassTf;
+	private JTextField nameTf, formClassTf, timoutHoursTf;
 
 	private JComboBox participantTypeCb, relativeTypeCb;
 
@@ -65,7 +65,9 @@ public class UserNodeEditor extends AbstractEditorDialog {
 				nameTf = new JTextField());
 		final JPanel l2 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.2")),
 				formClassTf = new JTextField());
-		p1.add(SwingUtils.createVertical(l1, l2));
+		final JPanel l3 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.16")),
+				timoutHoursTf = new JTextField());
+		p1.add(SwingUtils.createVertical(l1, l2, l3));
 
 		final JPanel p2 = new JPanel(new BorderLayout());
 		p2.setBorder(SwingUtils.createTitleBorder($m("UserNodeEditor.3")));
@@ -161,6 +163,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		final UserNode node = (UserNode) getNode();
 		nameTf.setText(node.getName());
 		formClassTf.setText(node.getFormClass());
+		timoutHoursTf.setText(node.getTimoutHours());
 
 		final AbstractParticipantType pt = node.getParticipantType();
 		if (pt instanceof RuleRole) {
@@ -192,6 +195,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		}
 		node.setName(name);
 		node.setFormClass(formClassTf.getText());
+		node.setTimoutHours(timoutHoursTf.getText());
 
 		if (i == 2) {
 			final User u = new User(null, node);

@@ -1,6 +1,5 @@
 package net.simpleframework.workflow.modeler;
 
-import java.awt.Font;
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -67,15 +66,13 @@ public class Application extends ObjectEx {
 		System.exit(0);
 	}
 
-	static final Font defautFont = new Font(Font.DIALOG, Font.PLAIN, 12);
-
 	static {
 		final UIDefaults defaults = UIManager.getDefaults();
 		final Enumeration<?> keys = defaults.keys();
 		while (keys.hasMoreElements()) {
 			final Object key = keys.nextElement();
 			if (key instanceof String && ((String) key).endsWith(".font")) {
-				defaults.put(key, defautFont);
+				defaults.put(key, SwingUtils.defautFont);
 			}
 		}
 		// try {

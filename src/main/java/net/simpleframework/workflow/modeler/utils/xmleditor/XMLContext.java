@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.swing.text.StyleContext;
 
+import net.simpleframework.workflow.modeler.utils.SwingUtils;
+
 public class XMLContext extends StyleContext {
 	public static final String XML_DECLARATION_STYLE = "xml_declaration";
 
@@ -35,7 +37,7 @@ public class XMLContext extends StyleContext {
 		syntaxFontMap = new HashMap<String, Font>();
 		syntaxForegroundMap = new HashMap<String, Color>();
 
-		final Font defaultFont = new Font("Monospaced", Font.PLAIN, 12);
+		final Font defaultFont = SwingUtils.defautFont;
 
 		syntaxName = StyleContext.DEFAULT_STYLE;
 		font = defaultFont;

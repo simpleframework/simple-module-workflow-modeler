@@ -5,6 +5,7 @@ import static net.simpleframework.common.I18n.$m;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -52,6 +53,7 @@ import net.simpleframework.workflow.modeler.Application;
  *         http://www.simpleframework.net
  */
 public abstract class SwingUtils {
+	public static final Font defautFont = new Font("Microsoft YaHei", Font.PLAIN, 12);
 
 	public static Window parent() {
 		return (Window) Application.get().getMainPane();
@@ -254,7 +256,7 @@ public abstract class SwingUtils {
 	}
 
 	public static JPanel createKV(final Component key, final Component value, final boolean fill) {
-		return createKV(key, value, 60, fill);
+		return createKV(key, value, 85, fill);
 	}
 
 	public static JPanel createKV(final Component key, final Component value, final int keyWidth) {
