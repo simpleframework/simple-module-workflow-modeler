@@ -94,7 +94,7 @@ public abstract class SwingUtils {
 				@Override
 				public boolean accept(final File f) {
 					final String[] types = StringUtils.split(fileFilterArr[0], ";");
-					if ((types == null) || (types.length == 0)) {
+					if (types.length == 0) {
 						return true;
 					} else {
 						if (!f.isFile()) {
