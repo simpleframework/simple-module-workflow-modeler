@@ -132,7 +132,7 @@ public class MainStatusBar extends JPanel {
 			final long totalMemory = rt.totalMemory();
 			final long freeMemory = rt.freeMemory();
 			final long usedMemory = totalMemory - freeMemory;
-			final StringBuffer buf = new StringBuffer();
+			final StringBuilder buf = new StringBuilder();
 			buf.append(formatSize(usedMemory, 1)).append("/").append(formatSize(totalMemory, 1));
 			setText(buf.toString());
 		}
