@@ -50,7 +50,7 @@ public class Application extends ObjectEx {
 			};
 			mainPane = new MainFrame();
 		} catch (final Exception e) {
-			log.error(e);
+			getLog().error(e);
 		} finally {
 			if (splash != null) {
 				splash.dispose();
