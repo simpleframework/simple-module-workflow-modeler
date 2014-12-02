@@ -19,14 +19,16 @@ public class DefaultModelerRemote extends AbstractWorkflowRemote {
 			ModelerSettings.get().getProperty("remote_page"),
 			"/sf/workflow-web-remote-ModelerRemotePage");
 
+	private String jsessionid;
+
 	@Override
 	public Map<String, Object> call(final String url, final String method,
 			final Map<String, Object> data) throws IOException {
-		final HttpClient httpClient = HttpClient.of(url);
+		final HttpClient httpClient = new HttpClient(url).setJsessionid(jsessionid);
 		final Map<String, Object> json = httpClient.post(remote_page + "?method=" + method, data);
-		final String jsessionid = (String) json.get("jsessionid");
-		if (StringUtils.hasText(jsessionid)) {
-			httpClient.setJsessionid(jsessionid);
+		final String _jsessionid = (String) json.get("jsessionid");
+		if (StringUtils.hasText(_jsessionid)) {
+			jsessionid = _jsessionid;
 		}
 		return json;
 	}
