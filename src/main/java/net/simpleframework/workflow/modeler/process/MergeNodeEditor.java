@@ -26,12 +26,13 @@ public class MergeNodeEditor extends AbstractEditorDialog {
 		super($m("MergeNodeEditor.0"), modelGraph, cell);
 	}
 
-	private JTextField countTf;
+	private JTextField conditionTf;
 
 	private JPanel createBasePane() {
 		final JPanel p1 = new JPanel(new BorderLayout());
 		p1.setBorder(SwingUtils.createTitleBorder($m("MergeNodeEditor.2")));
-		p1.add(SwingUtils.createKV(new JLabel($m("MergeNodeEditor.3")), countTf = new JTextField()));
+		p1.add(SwingUtils.createKV(new JLabel($m("MergeNodeEditor.3")),
+				conditionTf = new JTextField()));
 
 		return SwingUtils.createVertical(p1);
 	}
@@ -41,13 +42,13 @@ public class MergeNodeEditor extends AbstractEditorDialog {
 		super.initComponents();
 
 		final MergeNode node = (MergeNode) getNode();
-		countTf.setText(String.valueOf(node.getCount()));
+		conditionTf.setText(String.valueOf(node.getCondition()));
 	}
 
 	@Override
 	public void ok() {
 		final MergeNode node = (MergeNode) getNode();
-		node.setCount(countTf.getText());
+		node.setCondition(conditionTf.getText());
 		super.ok();
 	}
 
