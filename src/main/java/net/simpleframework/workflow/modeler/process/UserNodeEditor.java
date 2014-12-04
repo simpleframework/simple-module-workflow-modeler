@@ -51,9 +51,11 @@ public class UserNodeEditor extends AbstractEditorDialog {
 
 	private JTextField participantTf, preActivityTf, relativeTf, responseValueTf;
 
+	private JTextField paramsTf;
+
 	private JCheckBox sequentialCb, instanceSharedCb, manualCb, multiSelectedCb;
 
-	private JPanel m2, m3, m4, m5, m6, m7, m8;
+	private JPanel m2, m3, m4, m5, m6, m7, m8, m9;
 
 	protected ListenerPane listenerPane;
 
@@ -85,6 +87,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		});
 		m2 = SwingUtils
 				.createKV(new JLabel($m("UserNodeEditor.5")), participantTf = new JTextField());
+
 		m3 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.6")), relativeTypeCb = new JComboBox(
 				ERelativeType.values()));
 		relativeTypeCb.addItemListener(new ItemListener() {
@@ -97,6 +100,9 @@ public class UserNodeEditor extends AbstractEditorDialog {
 				preActivityTf.setText(null);
 			}
 		});
+
+		m9 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.17")), paramsTf = new JTextField());
+
 		m4 = SwingUtils
 				.createKV(new JLabel($m("UserNodeEditor.7")), preActivityTf = new JTextField());
 		m5 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.8")), relativeTf = new JTextField());
@@ -107,7 +113,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		m8 = SwingUtils.createFlow(manualCb = new JCheckBox($m("UserNodeEditor.12")), 10,
 				multiSelectedCb = new JCheckBox($m("UserNodeEditor.13")));
 
-		p2.add(SwingUtils.createVertical(m1, m2, m3, m4, m5, m6, m7, m8));
+		p2.add(SwingUtils.createVertical(m1, m2, m9, m3, m4, m5, m6, m7, m8));
 		return SwingUtils.createVertical(p1, p2);
 	}
 
@@ -135,6 +141,10 @@ public class UserNodeEditor extends AbstractEditorDialog {
 				relativeTf.setText(rr.getRelative());
 			} else {
 				participantTf.setText(pt.getParticipant());
+				if (pt instanceof RuleRole) {
+					final RuleRole rr = (RuleRole) pt;
+					paramsTf.setText(rr.getParams());
+				}
 			}
 
 			final Role r = (Role) pt;
@@ -154,6 +164,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		m6.setVisible(i != 2);
 		m7.setVisible(i != 2);
 		m8.setVisible(i != 2);
+		m9.setVisible(i == 3);
 	}
 
 	@Override
@@ -215,6 +226,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 			} else if (i == 3) {
 				r = new RuleRole(null, node);
 				r.setParticipant(participantTf.getText());
+				((RuleRole) r).setParams(paramsTf.getText());
 			} else {
 				r = new Role(null, node);
 				r.setParticipant(participantTf.getText());
