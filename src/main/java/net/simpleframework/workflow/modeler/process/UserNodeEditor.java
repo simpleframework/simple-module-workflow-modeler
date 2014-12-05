@@ -53,9 +53,11 @@ public class UserNodeEditor extends AbstractEditorDialog {
 
 	private JTextField paramsTf;
 
-	private JCheckBox sequentialCb, instanceSharedCb, manualCb, multiSelectedCb;
+	private JCheckBox sequentialCb, instanceSharedCb, indeptCb, manualCb, multiSelectedCb;
 
-	private JPanel m2, m3, m4, m5, m6, m7, m8, m9;
+	private JCheckBox multiTransitionSelectedCb;
+
+	private JPanel m2, m3, m4, m5, m6, m7, m8, m9, m10, m11;
 
 	protected ListenerPane listenerPane;
 
@@ -108,13 +110,22 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		m5 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.8")), relativeTf = new JTextField());
 		m6 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.9")),
 				responseValueTf = new JTextField());
+		m11 = SwingUtils.createFlow(indeptCb = new JCheckBox($m("UserNodeEditor.20")));
 		m7 = SwingUtils.createFlow(sequentialCb = new JCheckBox($m("UserNodeEditor.10")), 10,
 				instanceSharedCb = new JCheckBox($m("UserNodeEditor.11")));
 		m8 = SwingUtils.createFlow(manualCb = new JCheckBox($m("UserNodeEditor.12")), 10,
 				multiSelectedCb = new JCheckBox($m("UserNodeEditor.13")));
 
-		p2.add(SwingUtils.createVertical(m1, m2, m9, m3, m4, m5, m6, m7, m8));
-		return SwingUtils.createVertical(p1, p2);
+		p2.add(SwingUtils.createVertical(m1, m2, m9, m3, m4, m5, m6, m11, m7, m8));
+
+		final JPanel p3 = new JPanel(new BorderLayout());
+		p3.setBorder(SwingUtils.createTitleBorder($m("UserNodeEditor.18")));
+
+		m10 = SwingUtils
+				.createFlow(multiTransitionSelectedCb = new JCheckBox($m("UserNodeEditor.19")));
+		p3.add(SwingUtils.createVertical(m10));
+
+		return SwingUtils.createVertical(p1, p2, p3);
 	}
 
 	private void participantTypeChanged(final AbstractParticipantType pt) {
@@ -126,6 +137,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 			responseValueTf.setText(null);
 			sequentialCb.setSelected(false);
 			instanceSharedCb.setSelected(true);
+			indeptCb.setSelected(false);
 			manualCb.setSelected(false);
 			multiSelectedCb.setSelected(false);
 		} else if (pt instanceof User) {
@@ -139,6 +151,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 					preActivityTf.setText(rr.getPreActivity());
 				}
 				relativeTf.setText(rr.getRelative());
+				indeptCb.setSelected(rr.isIndept());
 			} else {
 				participantTf.setText(pt.getParticipant());
 				if (pt instanceof RuleRole) {
@@ -165,6 +178,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		m7.setVisible(i != 2);
 		m8.setVisible(i != 2);
 		m9.setVisible(i == 3);
+		m11.setVisible(i == 1);
 	}
 
 	@Override
@@ -175,6 +189,8 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		nameTf.setText(node.getName());
 		formClassTf.setText(node.getFormClass());
 		timoutHoursTf.setText(node.getTimoutHours());
+
+		multiTransitionSelectedCb.setSelected(node.isMultiTransitionSelected());
 
 		final AbstractParticipantType pt = node.getParticipantType();
 		if (pt instanceof RuleRole) {
@@ -207,6 +223,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		node.setName(name);
 		node.setFormClass(formClassTf.getText());
 		node.setTimoutHours(timoutHoursTf.getText());
+		node.setMultiTransitionSelected(multiTransitionSelectedCb.isSelected());
 
 		if (i == 2) {
 			final User u = new User(null, node);
@@ -223,6 +240,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 					rr.setPreActivity(preActivityTf.getText());
 				}
 				rr.setRelative(relativeTf.getText());
+				rr.setIndept(indeptCb.isSelected());
 			} else if (i == 3) {
 				r = new RuleRole(null, node);
 				r.setParticipant(participantTf.getText());
