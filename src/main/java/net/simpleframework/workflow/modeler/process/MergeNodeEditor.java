@@ -42,7 +42,7 @@ public class MergeNodeEditor extends AbstractEditorDialog {
 		super.initComponents();
 
 		final MergeNode node = (MergeNode) getNode();
-		conditionTf.setText(String.valueOf(node.getCondition()));
+		conditionTf.setText(node.getCondition());
 	}
 
 	@Override
