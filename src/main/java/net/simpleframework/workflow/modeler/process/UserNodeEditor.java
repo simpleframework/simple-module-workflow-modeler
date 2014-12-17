@@ -47,6 +47,8 @@ public class UserNodeEditor extends AbstractEditorDialog {
 
 	private JTextField nameTf, formClassTf, timoutHoursTf;
 
+	private JCheckBox emptyCb;
+
 	private JComboBox participantTypeCb, relativeTypeCb;
 
 	private JTextField participantTf, preActivityTf, relativeTf, responseValueTf;
@@ -71,7 +73,9 @@ public class UserNodeEditor extends AbstractEditorDialog {
 				formClassTf = new JTextField());
 		final JPanel l3 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.16")),
 				timoutHoursTf = new JTextField());
-		p1.add(SwingUtils.createVertical(l1, l2, l3));
+		final JPanel l4 = SwingUtils.createKV(new JLabel(), emptyCb = new JCheckBox(
+				$m("UserNodeEditor.21")));
+		p1.add(SwingUtils.createVertical(l1, l2, l3, l4));
 
 		final JPanel p2 = new JPanel(new BorderLayout());
 		p2.setBorder(SwingUtils.createTitleBorder($m("UserNodeEditor.3")));
@@ -189,6 +193,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		nameTf.setText(node.getName());
 		formClassTf.setText(node.getFormClass());
 		timoutHoursTf.setText(node.getTimoutHours());
+		emptyCb.setSelected(node.isEmpty());
 
 		multiTransitionSelectedCb.setSelected(node.isMultiTransitionSelected());
 
@@ -224,6 +229,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		node.setFormClass(formClassTf.getText());
 		node.setTimoutHours(timoutHoursTf.getText());
 		node.setMultiTransitionSelected(multiTransitionSelectedCb.isSelected());
+		node.setEmpty(emptyCb.isSelected());
 
 		if (i == 2) {
 			final User u = new User(null, node);
