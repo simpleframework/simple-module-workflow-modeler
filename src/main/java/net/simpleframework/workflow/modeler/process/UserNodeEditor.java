@@ -211,7 +211,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 	@Override
 	public void ok() {
 		final int i = participantTypeCb.getSelectedIndex();
-		if (i != 1 && assertNull(participantTf)) {
+		if (!emptyCb.isSelected() && i != 1 && assertNull(participantTf)) {
 			return;
 		}
 
