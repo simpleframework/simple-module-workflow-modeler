@@ -40,6 +40,8 @@ public abstract class AbstractEditorDialog extends OkCancelDialog {
 
 	protected VariablePane variablePane;
 
+	protected PropertiesPane propertiesPane;
+
 	protected DescriptionPane descriptionPane;
 
 	public AbstractEditorDialog(final String title, final ModelGraph modelGraph, final mxCell cell) {
@@ -120,8 +122,13 @@ public abstract class AbstractEditorDialog extends OkCancelDialog {
 				tabbedPane.add(tab.getKey(), (Component) tab.getValue());
 			}
 		}
+		tabbedPane.add(PropertiesPane.title, propertiesPane = new PropertiesPane());
 		tabbedPane.add(DescriptionPane.title, descriptionPane = new DescriptionPane(true));
 		return tabbedPane;
+	}
+
+	public static class PropertiesPane extends JPanel {
+		public static final String title = $m("PropertiesPane.0");
 	}
 
 	public static class DescriptionPane extends JPanel {
