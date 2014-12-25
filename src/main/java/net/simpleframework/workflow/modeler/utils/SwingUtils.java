@@ -224,9 +224,11 @@ public abstract class SwingUtils {
 	}
 
 	public static Border createTitleBorder(final String title) {
-		final Border tb = BorderFactory.createTitledBorder(title);
-		final Border eb = BorderFactory.createEmptyBorder(0, 5, 5, 5);
-		return BorderFactory.createCompoundBorder(tb, eb);
+		// final Border tb =
+		// final Border eb = BorderFactory.createEmptyBorder(0, 5, 0, 5);
+		// BorderFactory.createCompoundBorder(tb,
+		// eb);
+		return BorderFactory.createTitledBorder(title);
 	}
 
 	static final String LAF_WINDOWS = "com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel";

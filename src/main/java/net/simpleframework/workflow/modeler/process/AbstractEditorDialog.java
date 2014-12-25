@@ -2,6 +2,7 @@ package net.simpleframework.workflow.modeler.process;
 
 import static net.simpleframework.common.I18n.$m;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -10,6 +11,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,10 +39,9 @@ import com.mxgraph.model.mxCell;
  */
 @SuppressWarnings("serial")
 public abstract class AbstractEditorDialog extends OkCancelDialog {
-
 	protected VariablePane variablePane;
 
-	protected PropertiesPane propertiesPane;
+	protected ExtPane extPane;
 
 	protected DescriptionPane descriptionPane;
 
@@ -79,12 +80,16 @@ public abstract class AbstractEditorDialog extends OkCancelDialog {
 			}
 			descriptionPane.editor.setText(node.getDescription());
 		}
+		if (extPane != null) {
+			extPane.editor.setText(node.getExt());
+		}
 	}
 
 	@Override
 	public void ok() {
+		final Node node = getNode();
+
 		if (descriptionPane != null) {
-			final Node node = getNode();
 			if (descriptionPane.text != null) {
 				final String nTxt = descriptionPane.text.getText();
 				if (!nTxt.equals(node.getText())) {
@@ -99,6 +104,11 @@ public abstract class AbstractEditorDialog extends OkCancelDialog {
 			}
 			node.setDescription(descriptionPane.editor.getText());
 		}
+
+		if (extPane != null) {
+			node.setExt(extPane.editor.getText());
+		}
+
 		final ModelGraph modelGraph = (ModelGraph) params[0];
 		modelGraph.getGraph().refresh();
 		if (nDocument != null) {
@@ -122,13 +132,21 @@ public abstract class AbstractEditorDialog extends OkCancelDialog {
 				tabbedPane.add(tab.getKey(), (Component) tab.getValue());
 			}
 		}
-		tabbedPane.add(PropertiesPane.title, propertiesPane = new PropertiesPane());
+		tabbedPane.add(ExtPane.title, extPane = new ExtPane());
 		tabbedPane.add(DescriptionPane.title, descriptionPane = new DescriptionPane(true));
 		return tabbedPane;
 	}
 
-	public static class PropertiesPane extends JPanel {
+	public static class ExtPane extends JPanel {
 		public static final String title = $m("PropertiesPane.0");
+
+		JTextArea editor;
+
+		public ExtPane() {
+			super(new BorderLayout());
+			setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+			add(new JScrollPane(editor = new JTextArea()), BorderLayout.CENTER);
+		}
 	}
 
 	public static class DescriptionPane extends JPanel {

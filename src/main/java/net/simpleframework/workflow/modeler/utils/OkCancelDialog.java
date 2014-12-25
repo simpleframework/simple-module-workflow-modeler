@@ -13,7 +13,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 import net.simpleframework.common.coll.ArrayUtils;
 
@@ -99,7 +98,7 @@ public abstract class OkCancelDialog extends EnhancedDialog implements ActionLis
 			bp.add(Box.createHorizontalStrut(2));
 			bp.add(helpButton);
 		}
-		panel.setBorder(getBorder());
+		panel.setBorder(BorderFactory.createEmptyBorder());
 		final Component content = createContentUI();
 		if (content != null) {
 			panel.add(content, BorderLayout.CENTER);
@@ -117,10 +116,6 @@ public abstract class OkCancelDialog extends EnhancedDialog implements ActionLis
 		okButton.addActionListener(this);
 		cancelButton.addActionListener(this);
 		helpButton.addActionListener(this);
-	}
-
-	protected Border getBorder() {
-		return BorderFactory.createEmptyBorder();
 	}
 
 	protected void help() {
