@@ -34,7 +34,7 @@ import net.simpleframework.workflow.schema.VariableNode;
  * @author 陈侃(cknet@126.com, 13910090885) https://github.com/simpleframework
  *         http://www.simpleframework.net
  */
-@SuppressWarnings({ "serial", "rawtypes", "unchecked" })
+@SuppressWarnings({ "serial" })
 public class VariablePane extends AEDPanel {
 
 	static final String title = $m("VariablePane.0");
