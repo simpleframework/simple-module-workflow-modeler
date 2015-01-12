@@ -32,6 +32,7 @@ import net.simpleframework.workflow.schema.TransitionNode;
  * @author 陈侃(cknet@126.com, 13910090885) https://github.com/simpleframework
  *         http://www.simpleframework.net
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class TransitionEditor extends AbstractEditorDialog {
 
 	private static final Vector<String> transitionTypes = ArrayUtils.asVector(
