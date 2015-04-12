@@ -47,7 +47,7 @@ public class ModelEditor extends AbstractEditorDialog {
 		super($m("ModelEditor.0"), modelGraph, null);
 	}
 
-	private JTextField nameTf, versionTf, authorTf, formClassTf;
+	private JTextField nameTf, versionTf, authorTf, formClassTf, viewClassTf;
 
 	private JCheckBox instanceSharedCb;
 
@@ -71,9 +71,11 @@ public class ModelEditor extends AbstractEditorDialog {
 				authorTf = new JTextField());
 		final JPanel l4 = SwingUtils.createKV(new JLabel($m("ModelEditor.6")),
 				formClassTf = new JTextField());
-		final JPanel l5 = SwingUtils.createKV(new JLabel(), instanceSharedCb = new JCheckBox(
+		final JPanel l5 = SwingUtils.createKV(new JLabel($m("ModelEditor.12")),
+				viewClassTf = new JTextField());
+		final JPanel l6 = SwingUtils.createKV(new JLabel(), instanceSharedCb = new JCheckBox(
 				$m("ModelEditor.7")));
-		p1.add(SwingUtils.createVertical(l1, l2, l3, l4, l5));
+		p1.add(SwingUtils.createVertical(l1, l2, l3, l4, l5, l6));
 
 		final JPanel startup = SwingUtils.createKV(new JLabel($m("ModelEditor.11")),
 				startupTypeCb = new JComboBox(startupTypes), false);
@@ -138,6 +140,7 @@ public class ModelEditor extends AbstractEditorDialog {
 		authorTf.setText(processNode.getAuthor());
 		instanceSharedCb.setSelected(processNode.isInstanceShared());
 		formClassTf.setText(processNode.getFormClass());
+		viewClassTf.setText(processNode.getViewClass());
 
 		final AbstractProcessStartupType st = processNode.getStartupType();
 		if (st instanceof Email) {
@@ -155,6 +158,7 @@ public class ModelEditor extends AbstractEditorDialog {
 		processNode.setAuthor(authorTf.getText());
 		processNode.setInstanceShared(instanceSharedCb.isSelected());
 		processNode.setFormClass(formClassTf.getText());
+		processNode.setViewClass(viewClassTf.getText());
 
 		final int i = startupTypeCb.getSelectedIndex();
 		if (i == 0) {
