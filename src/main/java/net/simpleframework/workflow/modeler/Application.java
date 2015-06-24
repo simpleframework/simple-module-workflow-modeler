@@ -37,7 +37,7 @@ public class Application extends ObjectEx {
 
 	void startup(final String[] args) {
 		try {
-			ClassUtils.scanResources("net.simpleframework.workflow",
+			ClassUtils.scanResources("net.simpleframework",
 					new IScanResourcesCallback[] { I18n.getBasenamesCallback() });
 
 			// ui
