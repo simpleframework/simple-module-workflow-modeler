@@ -37,9 +37,14 @@ import net.simpleframework.workflow.schema.UserNode.RuleRole;
  */
 public class UserNodeEditor extends AbstractEditorDialog {
 
-	private static final Vector<String> participantTypes = ArrayUtils.asVector(
+	private static Vector<String> participantTypes = ArrayUtils.asVector(
 			$m("AbstractParticipantType.BaseRole"), $m("AbstractParticipantType.RelativeRole"),
 			$m("AbstractParticipantType.User"), $m("AbstractParticipantType.RuleRole"));
+
+	private static int d_rr_n = 4;
+
+	// private static Map<String,String> ruleRoles = new LinkedHashMap<String,
+	// String>();
 
 	public UserNodeEditor(final ModelGraph modelGraph, final TaskCell cell) {
 		super($m("UserNodeEditor.0"), modelGraph, cell);
@@ -64,6 +69,10 @@ public class UserNodeEditor extends AbstractEditorDialog {
 	protected ListenerPane listenerPane;
 
 	private JPanel createBasePane() {
+		if (participantTypes.size() == d_rr_n) {
+			participantTypes.addAll(ExtRuleRoles.get().getRuleRoles());
+		}
+
 		final JPanel p1 = new JPanel(new BorderLayout());
 		p1.setBorder(SwingUtils.createTitleBorder($m("UserNodeEditor.1")));
 
@@ -120,7 +129,11 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		m8 = SwingUtils.createFlow(manualCb = new JCheckBox($m("UserNodeEditor.12")), 10,
 				multiSelectedCb = new JCheckBox($m("UserNodeEditor.13")));
 
-		p2.add(SwingUtils.createVertical(m1, m2, m9, m3, m4, m5, m6, m11, m7, m8));
+		JPanel jp = ExtRuleRoles.get().getUI(this);
+		if (null != jp)
+			p2.add(SwingUtils.createVertical(m1, m2, m9, jp, m3, m4, m5, m6, m11, m7, m8));
+		else
+			p2.add(SwingUtils.createVertical(m1, m2, m9, m3, m4, m5, m6, m11, m7, m8));
 
 		final JPanel p3 = new JPanel(new BorderLayout());
 		p3.setBorder(SwingUtils.createTitleBorder($m("UserNodeEditor.18")));
@@ -181,8 +194,28 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		m6.setVisible(i != 2);
 		m7.setVisible(i != 2);
 		m8.setVisible(i != 2);
-		m9.setVisible(i == 3);
+		m9.setVisible(i >= 3);
 		m11.setVisible(i == 1);
+
+		if (i >= d_rr_n) {
+			String text = ExtRuleRoles.get().getRuleRoleName(
+					participantTypeCb.getSelectedItem().toString());
+			participantTf.setText(text);
+			ExtRuleRoles.get().initPComponentsValues(text, paramsTf.getText());
+			ExtRuleRoles.get().show(text);
+			participantTf.setEditable(false);
+			paramsTf.setEditable(false);
+		} else {
+			// participantTf.setText("");
+			participantTf.setEditable(true);
+			paramsTf.setEditable(true);
+			ExtRuleRoles.get().show("");
+		}
+
+	}
+
+	public JTextField getParamsTf() {
+		return paramsTf;
 	}
 
 	@Override
@@ -199,7 +232,12 @@ public class UserNodeEditor extends AbstractEditorDialog {
 
 		final AbstractParticipantType pt = node.getParticipantType();
 		if (pt instanceof RuleRole) {
-			participantTypeCb.setSelectedIndex(3);
+			if (StringUtils.hasText(pt.getParticipant())) {
+				participantTypeCb.setSelectedIndex(3 + ExtRuleRoles.get().getRuleRolesI(
+						pt.getParticipant()));
+			} else {
+				participantTypeCb.setSelectedIndex(3);
+			}
 		} else if (pt instanceof User) {
 			participantTypeCb.setSelectedIndex(2);
 		} else if (pt instanceof RelativeRole) {
@@ -210,7 +248,10 @@ public class UserNodeEditor extends AbstractEditorDialog {
 
 	@Override
 	public void ok() {
-		final int i = participantTypeCb.getSelectedIndex();
+		int i = participantTypeCb.getSelectedIndex();
+		if (i >= d_rr_n)
+			i = 3;// 之后的都是规则角色
+
 		if (!emptyCb.isSelected() && i != 1 && assertNull(participantTf)) {
 			return;
 		}
