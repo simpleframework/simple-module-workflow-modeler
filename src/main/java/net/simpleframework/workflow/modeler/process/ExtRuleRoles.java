@@ -9,8 +9,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,52 +22,46 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import net.simpleframework.common.IoUtils;
-import net.simpleframework.common.JsonUtils;
 import net.simpleframework.common.StringUtils;
+import net.simpleframework.common.coll.KVMap;
+import net.simpleframework.workflow.modeler.Application;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 
 public class ExtRuleRoles {
-	private static Map<String, ?> ALL_CLASS = null;
-	private static final File settingsFile = new File("rule_role_class.json");
-	static {
-		if (settingsFile.exists()) {
-			FileInputStream iStream = null;
+
+	private static Map<String, Map<String, Object>> ALL_CLASS1 = new HashMap<String, Map<String, Object>>();
+
+	private void init() {
+		final ModelGraph modelGraph = une.getModelGraph();
+		String url = modelGraph.getTabbedContent().getTreeNode().getUrl();
+		CLASS = ALL_CLASS1.get(url);
+		if (null == CLASS) {
 			try {
-				String jsons = IoUtils.getStringFromInputStream(iStream = new FileInputStream(
-						settingsFile));
-				if (StringUtils.hasText(jsons)) {
-					ALL_CLASS = JsonUtils.toMap(jsons);
+				Map<String, Object> p = Application.remote().call(url, "participants", new KVMap());
+				if (Application.isError(p)) {
+					return;
 				}
-			} catch (final IOException e) {
+				ALL_CLASS1.put(url, p);
+				CLASS = p;
+			} catch (IOException e) {
 				e.printStackTrace();
-			} finally {
-				if (iStream != null) {
-					try {
-						iStream.close();
-					} catch (final IOException e) {
-					}
-				}
 			}
 		}
 	}
 
-	private ExtRuleRoles() {
-	}
+	UserNodeEditor une = null;
+	Map<String, Object> CLASS = null;
 
-	private static ExtRuleRoles rr = null;
-
-	public static ExtRuleRoles get() {
-		if (null == rr)
-			return rr = new ExtRuleRoles();
-		else
-			return rr;
+	public ExtRuleRoles(UserNodeEditor une) {
+		this.une = une;
+		init();
 	}
 
 	public List<?> getAllClass() {
-		return (List<?>) ALL_CLASS.get("all-class");
+		return (List<?>) CLASS.get("all-class");
 	}
 
+	@SuppressWarnings("rawtypes")
 	public int getRuleRolesI(String formClass) {
 		int i = 0;
 		List<?> list = getAllClass();
@@ -85,6 +77,7 @@ public class ExtRuleRoles {
 		return 0;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public String getRuleRoleName(String text) {
 		List<?> list = getAllClass();
 		for (Object obj : list) {
@@ -98,6 +91,7 @@ public class ExtRuleRoles {
 		return text;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List<String> getRuleRoles() {
 		List<String> l = new ArrayList<String>();
 		List<?> list = getAllClass();
@@ -121,10 +115,8 @@ public class ExtRuleRoles {
 		}
 	}
 
-	UserNodeEditor une = null;
-
-	public JPanel getUI(UserNodeEditor une) {
-		this.une = une;
+	@SuppressWarnings("rawtypes")
+	public JPanel getUI() {
 		final JPanel p2 = new JPanel(new BorderLayout());
 		List<Component> p2s = new ArrayList<Component>();
 		List<?> list = getAllClass();
@@ -262,6 +254,7 @@ public class ExtRuleRoles {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	private Object getParValI(String classs, String parname, String vv, boolean i) {
 		List<?> list = getAllClass();
 		for (Object obj : list) {
