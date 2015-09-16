@@ -199,7 +199,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		m6.setVisible(i != 2);
 		m7.setVisible(i != 2);
 		m8.setVisible(i != 2);
-		m9.setVisible(i >= 3);
+		m9.setVisible(i == 3);
 		m11.setVisible(i == 1);
 
 		if (i >= d_rr_n) {
@@ -210,6 +210,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 			extParticipant.show(text);
 			participantTf.setEditable(false);
 			paramsTf.setEditable(false);
+			m2.setVisible(false);
 		} else {
 			// participantTf.setText("");
 			participantTf.setEditable(true);

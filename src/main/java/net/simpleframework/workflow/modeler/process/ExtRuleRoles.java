@@ -143,7 +143,7 @@ public class ExtRuleRoles {
 									}
 								}
 								m1 = SwingUtils.createKV(new JLabel((String) par.get("text")),
-										pc = new JComboBox(ps), 100, true);
+										pc = new JComboBox(ps), 150, true);
 								pc.setName(cname + ":" + pname);
 								((JComboBox) pc).addItemListener(new ItemListener() {
 									@Override
@@ -162,7 +162,7 @@ public class ExtRuleRoles {
 								});
 							} else {
 								m1 = SwingUtils.createKV(new JLabel((String) par.get("text")),
-										pc = new JTextField(), 100, true);
+										pc = new JTextField(), 150, true);
 								pc.setName(cname + ":" + pname);
 								((JTextField) pc).addKeyListener(new KeyListener() {
 
