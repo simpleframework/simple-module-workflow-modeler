@@ -5,7 +5,7 @@ import java.util.Map;
 
 import net.simpleframework.common.StringUtils;
 import net.simpleframework.common.web.HttpClient;
-import net.simpleframework.workflow.remote.AbstractWorkflowRemote;
+import net.simpleframework.workflow.remote.AbstractWorkflowRemoteHandler;
 
 /**
  * Licensed under the Apache License, Version 2.0
@@ -13,7 +13,7 @@ import net.simpleframework.workflow.remote.AbstractWorkflowRemote;
  * @author 陈侃(cknet@126.com, 13910090885) https://github.com/simpleframework
  *         http://www.simpleframework.net
  */
-public class DefaultModelerRemote extends AbstractWorkflowRemote {
+public class DefaultModelerRemoteHandler extends AbstractWorkflowRemoteHandler {
 
 	private final String remote_page = StringUtils.text(
 			ModelerSettings.get().getProperty("remote_page"),

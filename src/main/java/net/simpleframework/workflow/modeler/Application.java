@@ -12,7 +12,7 @@ import net.simpleframework.common.I18n;
 import net.simpleframework.common.object.ObjectEx;
 import net.simpleframework.workflow.modeler.utils.SplashScreen;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
-import net.simpleframework.workflow.remote.IWorkflowRemote;
+import net.simpleframework.workflow.remote.IWorkflowRemoteHandler;
 
 /**
  * Licensed under the Apache License, Version 2.0
@@ -91,7 +91,7 @@ public class Application extends ObjectEx {
 		return false;
 	}
 
-	public static IWorkflowRemote remote() {
-		return singleton(DefaultModelerRemote.class);
+	public static IWorkflowRemoteHandler remote() {
+		return singleton(DefaultModelerRemoteHandler.class);
 	}
 }
