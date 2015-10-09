@@ -113,7 +113,7 @@ public class ConnectionDialog extends OkCancelDialog {
 		settings.setConnectionPassword(name, password);
 		settings.save();
 
-		if (connection == null) {
+		if (null == connection) {
 			final NodeRoot root = tree.getModel().getRoot();
 			root.add(new NodeConnection(name, url, login, password));
 		}
