@@ -134,11 +134,12 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		m8 = SwingUtils.createFlow(manualCb = new JCheckBox($m("UserNodeEditor.12")), 10,
 				multiSelectedCb = new JCheckBox($m("UserNodeEditor.13")));
 
-		JPanel jp = extParticipant.getUI();
-		if (null != jp)
+		final JPanel jp = extParticipant.getUI();
+		if (null != jp) {
 			p2.add(SwingUtils.createVertical(m1, m2, m9, jp, m3, m4, m5, m6, m11, m7, m8));
-		else
+		} else {
 			p2.add(SwingUtils.createVertical(m1, m2, m9, m3, m4, m5, m6, m11, m7, m8));
+		}
 
 		final JPanel p3 = new JPanel(new BorderLayout());
 		p3.setBorder(SwingUtils.createTitleBorder($m("UserNodeEditor.18")));
@@ -203,7 +204,7 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		m11.setVisible(i == 1);
 
 		if (i >= d_rr_n) {
-			String text = extParticipant.getRuleRoleName(participantTypeCb.getSelectedItem()
+			final String text = extParticipant.getRuleRoleName(participantTypeCb.getSelectedItem()
 					.toString());
 			participantTf.setText(text);
 			extParticipant.initPComponentsValues(text, paramsTf.getText());
@@ -259,8 +260,9 @@ public class UserNodeEditor extends AbstractEditorDialog {
 	@Override
 	public void ok() {
 		int i = participantTypeCb.getSelectedIndex();
-		if (i >= d_rr_n)
+		if (i >= d_rr_n) {
 			i = 3;// 之后的都是规则角色
+		}
 
 		if (!emptyCb.isSelected() && i != 1 && assertNull(participantTf)) {
 			return;
