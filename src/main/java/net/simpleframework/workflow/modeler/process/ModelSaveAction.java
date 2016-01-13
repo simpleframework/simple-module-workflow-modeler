@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.Map;
 
+import net.simpleframework.common.StringUtils;
+import net.simpleframework.common.Version;
 import net.simpleframework.common.coll.KVMap;
 import net.simpleframework.workflow.modeler.Application;
 import net.simpleframework.workflow.modeler.ApplicationActions;
@@ -42,6 +44,10 @@ public class ModelSaveAction extends ApplicationAction {
 							tabbedContent.getDocument().toString()));
 			if (Application.isError(kv)) {
 				return;
+			}
+			final String ver = (String) kv.get("ver");
+			if (StringUtils.hasText(ver)) {
+				modelGraph.getProcessNode().setVersion(Version.getVersion(ver));
 			}
 		} catch (final IOException ex) {
 			SwingUtils.showError(ex);

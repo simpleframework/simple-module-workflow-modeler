@@ -163,7 +163,7 @@ public class ModelGraph extends mxGraphComponent {
 		return tabbedContent;
 	}
 
-	private ProcessNode getProcessNode() {
+	ProcessNode getProcessNode() {
 		return tabbedContent.getDocument().getProcessNode();
 	}
 
