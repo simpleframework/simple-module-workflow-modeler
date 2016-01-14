@@ -62,7 +62,7 @@ public abstract class AbstractEditorDialog extends OkCancelDialog {
 		final ModelGraph modelGraph = (ModelGraph) params[0];
 		final mxCell cell = (mxCell) params[1];
 		if (nDocument == null) {
-			nDocument = modelGraph.getTabbedContent().getDocument().clone();
+			nDocument = modelGraph.getTabbedContent().getDocument();
 		}
 		final ProcessNode processNode = nDocument.getProcessNode();
 		if (cell == null) {
