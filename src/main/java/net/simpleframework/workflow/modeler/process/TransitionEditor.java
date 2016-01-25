@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import net.simpleframework.common.Convert;
 import net.simpleframework.common.coll.ArrayUtils;
 import net.simpleframework.common.coll.KVMap;
 import net.simpleframework.workflow.graph.TransitionCell;
@@ -46,9 +47,9 @@ public class TransitionEditor extends AbstractEditorDialog {
 
 	private JCheckBox manualCb;
 
-	private JTextField expressionTf, transitionIdTf, handlerClassTf;
+	private JTextField expressionTf, transitionIdTf, handlerClassTf, orderTf;
 
-	private JPanel p2, p3, p4, p5, p6;
+	private JPanel p2, p3, p4, p5, p6, p7;
 
 	private JPanel createBasePane() {
 		final JPanel p1 = SwingUtils.createKV(new JLabel($m("TransitionEditor.2")),
@@ -62,6 +63,7 @@ public class TransitionEditor extends AbstractEditorDialog {
 		p5 = SwingUtils.createKV(new JLabel(), manualCb = new JCheckBox($m("TransitionEditor.6")));
 		p6 = SwingUtils.createKV(new JLabel($m("TransitionEditor.7")),
 				handlerClassTf = new JTextField());
+		p7 = SwingUtils.createKV(new JLabel($m("TransitionEditor.8")), orderTf = new JTextField());
 
 		transitionTypeCb.addItemListener(new ItemListener() {
 			@Override
@@ -73,7 +75,7 @@ public class TransitionEditor extends AbstractEditorDialog {
 			}
 		});
 
-		final JPanel pane = SwingUtils.createVertical(p1, p2, p3, p4, p5, p6, new JPanel());
+		final JPanel pane = SwingUtils.createVertical(p1, p2, p3, p4, p5, p6, p7, new JPanel());
 		pane.setBorder(BorderFactory.createEmptyBorder(10, 5, 5, 5));
 		return pane;
 	}
@@ -117,6 +119,7 @@ public class TransitionEditor extends AbstractEditorDialog {
 			transitionTypeCb.setSelectedIndex(2);
 		}
 		transitionTypeChanged(tt);
+		orderTf.setText(Convert.toString(transition.getOrder()));
 	}
 
 	@Override
@@ -142,7 +145,7 @@ public class TransitionEditor extends AbstractEditorDialog {
 			transition.setTransitionType(intr);
 			intr.setHandlerClass(handlerClassTf.getText());
 		}
-
+		transition.setOrder(Convert.toInt(orderTf.getText()));
 		super.ok();
 	}
 
