@@ -3,6 +3,7 @@ package net.simpleframework.workflow.modeler.process;
 import static net.simpleframework.common.I18n.$m;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Map;
@@ -151,6 +152,15 @@ public class ModelEditor extends AbstractEditorDialog {
 			startupTypeCb.setSelectedIndex(1);
 		}
 		startupTypeChanged(st);
+	}
+
+	@Override
+	public void pack() {
+		super.pack();
+		Dimension di = getSize();
+		if (di.getWidth() > 600 || di.getHeight() > 400) {
+			setSize(new Dimension(600, 400));
+		}
 	}
 
 	@Override
