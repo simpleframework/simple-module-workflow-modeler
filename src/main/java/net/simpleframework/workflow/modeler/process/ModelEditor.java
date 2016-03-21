@@ -160,7 +160,7 @@ public class ModelEditor extends AbstractEditorDialog {
 	@Override
 	public void pack() {
 		super.pack();
-		Dimension di = getSize();
+		final Dimension di = getSize();
 		if (di.getWidth() > 600 || di.getHeight() > 400) {
 			setSize(new Dimension(600, 400));
 		}
