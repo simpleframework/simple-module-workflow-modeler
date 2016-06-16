@@ -128,9 +128,11 @@ public class VariablePane extends AEDPanel {
 			lbl1.setPreferredSize(new Dimension(65, lbl1.getPreferredSize().height));
 			lbl4.setPreferredSize(new Dimension(65, lbl4.getPreferredSize().height));
 
-			final JPanel p1 = SwingUtils.createVertical(SwingUtils.createFlow(lbl1, nameComp, 10,
-					lbl2, 10, typeComp, 10, lbl3, 10, modeComp), SwingUtils.createFlow(lbl4, logsComp,
-					20, staticallyComp = new JCheckBox($m("VariableEditor.5"))));
+			final JPanel p1 = SwingUtils.createVertical(
+					SwingUtils.createFlow(lbl1, nameComp, 10, lbl2, 10, typeComp, 10, lbl3, 10,
+							modeComp),
+					SwingUtils.createFlow(lbl4, logsComp, 20,
+							staticallyComp = new JCheckBox($m("VariableEditor.5"))));
 			p1.setBorder(SwingUtils.createTitleBorder($m("VariableEditor.6")));
 
 			final JPanel p2 = new JPanel(new BorderLayout());

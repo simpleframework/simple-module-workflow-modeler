@@ -37,11 +37,9 @@ public class ModelSaveAction extends ApplicationAction {
 		final ModelTabbedContent tabbedContent = modelGraph.getTabbedContent();
 		final NodeProcessModel nodeProcessModel = tabbedContent.getTreeNode();
 		try {
-			final Map<String, Object> kv = Application.remote().call(
-					nodeProcessModel.getUrl(),
-					"saveModel",
-					new KVMap().add("id", nodeProcessModel.getJsonModel().get("id")).add("doc",
-							tabbedContent.getDocument().toString()));
+			final Map<String, Object> kv = Application.remote().call(nodeProcessModel.getUrl(),
+					"saveModel", new KVMap().add("id", nodeProcessModel.getJsonModel().get("id"))
+							.add("doc", tabbedContent.getDocument().toString()));
 			if (Application.isError(kv)) {
 				return;
 			}

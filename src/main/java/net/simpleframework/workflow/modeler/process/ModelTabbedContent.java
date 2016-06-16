@@ -13,14 +13,14 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import com.mxgraph.swing.mxGraphComponent;
+
 import net.simpleframework.common.StringUtils;
 import net.simpleframework.workflow.modeler.TabbedContent;
 import net.simpleframework.workflow.modeler.navigation.NodeProcessModel;
 import net.simpleframework.workflow.modeler.utils.xmleditor.XMLEditorKit;
 import net.simpleframework.workflow.schema.ProcessDocument;
 import net.simpleframework.workflow.schema.ProcessNode;
-
-import com.mxgraph.swing.mxGraphComponent;
 
 /**
  * Licensed under the Apache License, Version 2.0
@@ -40,7 +40,8 @@ public class ModelTabbedContent extends TabbedContent {
 
 	private ModelGraphToolbar toolbar;
 
-	public ModelTabbedContent(final NodeProcessModel nodeProcessModel, final ProcessDocument document) {
+	public ModelTabbedContent(final NodeProcessModel nodeProcessModel,
+			final ProcessDocument document) {
 		this.nodeProcessModel = nodeProcessModel;
 		this.document = document;
 	}

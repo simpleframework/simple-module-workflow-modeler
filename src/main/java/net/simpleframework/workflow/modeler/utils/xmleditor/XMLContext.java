@@ -34,8 +34,8 @@ public class XMLContext extends StyleContext {
 		String syntaxName;
 		Font font;
 		Color fontForeground;
-		syntaxFontMap = new HashMap<String, Font>();
-		syntaxForegroundMap = new HashMap<String, Color>();
+		syntaxFontMap = new HashMap<>();
+		syntaxForegroundMap = new HashMap<>();
 
 		final Font defaultFont = SwingUtils.defautFont;
 

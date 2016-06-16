@@ -66,8 +66,9 @@ public abstract class TabbedContent implements ITabbedContent {
 
 	@Override
 	public boolean equals(final Object obj) {
-		return obj instanceof ITabbedContent ? ObjectUtils.objectEquals(getIdentifier(),
-				((ITabbedContent) obj).getIdentifier()) : false;
+		return obj instanceof ITabbedContent
+				? ObjectUtils.objectEquals(getIdentifier(), ((ITabbedContent) obj).getIdentifier())
+				: false;
 	}
 
 	@Override

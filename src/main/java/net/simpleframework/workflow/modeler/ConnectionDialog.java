@@ -47,10 +47,12 @@ public class ConnectionDialog extends OkCancelDialog {
 		loginField = new JTextField();
 		passwordField = new JPasswordField();
 
-		final JPanel jp = SwingUtils.createKV(imageLabel, SwingUtils.createVertical(new JLabel(
-				$m("ConnectionDialog.0")), nameField, new JLabel($m("ConnectionDialog.1")), urlField,
-				new JLabel($m("ConnectionDialog.3")), loginField, new JLabel($m("ConnectionDialog.4")),
-				passwordField), 64);
+		final JPanel jp = SwingUtils.createKV(imageLabel,
+				SwingUtils.createVertical(new JLabel($m("ConnectionDialog.0")), nameField,
+						new JLabel($m("ConnectionDialog.1")), urlField,
+						new JLabel($m("ConnectionDialog.3")), loginField,
+						new JLabel($m("ConnectionDialog.4")), passwordField),
+				64);
 		jp.setBorder(BorderFactory.createEmptyBorder(8, 0, 0, 0));
 		return SwingUtils.createVertical(jp);
 	}
@@ -73,7 +75,7 @@ public class ConnectionDialog extends OkCancelDialog {
 		}
 
 		final ModelerSettings settings = ModelerSettings.get();
-		final Vector<String> connections = new Vector<String>(settings.getConnections());
+		final Vector<String> connections = new Vector<>(settings.getConnections());
 		final NodeConnection connection = (NodeConnection) params[0];
 		final String name = nameField.getText();
 		if (connections.contains(name)) {

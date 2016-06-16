@@ -340,6 +340,7 @@ public class XMLScanner {
 
 	boolean isXMLSpace(final char c) {
 		return (c <= 0x0020)
-				&& (((((1L << 0x0009) | (1L << 0x000A) | (1L << 0x000D) | (1L << 0x0020)) >> c) & 1L) != 0);
+				&& (((((1L << 0x0009) | (1L << 0x000A) | (1L << 0x000D) | (1L << 0x0020)) >> c)
+						& 1L) != 0);
 	}
 }

@@ -193,14 +193,13 @@ public class JTabbedPaneEx extends JTabbedPane implements MouseListener, MouseMo
 			final Point pos = vpIsNull ? new Point() : headerViewport.getViewPosition();
 			final int vpDiffX = (vpIsNull ? 0 : headerViewport.getX());
 			final int vpDiffY = (vpIsNull ? 0 : headerViewport.getY());
-			final Rectangle drawRect = new Rectangle(rect.x - pos.x + vpDiffX, rect.y - pos.y
-					+ vpDiffY, rect.width, rect.height);
+			final Rectangle drawRect = new Rectangle(rect.x - pos.x + vpDiffX,
+					rect.y - pos.y + vpDiffY, rect.width, rect.height);
 
 			if (e.getID() == MouseEvent.MOUSE_PRESSED) {
 				icon.mousepressed = e.getModifiers() == InputEvent.BUTTON1_MASK;
 				repaint(drawRect);
-			} else if ((e.getID() == MouseEvent.MOUSE_MOVED)
-					|| (e.getID() == MouseEvent.MOUSE_DRAGGED)
+			} else if ((e.getID() == MouseEvent.MOUSE_MOVED) || (e.getID() == MouseEvent.MOUSE_DRAGGED)
 					|| (e.getID() == MouseEvent.MOUSE_CLICKED)) {
 				pos.x += e.getX() - vpDiffX;
 				pos.y += e.getY() - vpDiffY;

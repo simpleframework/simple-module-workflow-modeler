@@ -99,8 +99,8 @@ public class NodeProcessModel extends NavigationTreeNode {
 			}
 
 			final MainTabbedPane jp = Application.get().getMainPane().getTabbedPane();
-			tabbedContent = new ModelTabbedContent(this, new ProcessDocument(new StringReader(
-					(String) json.get("doc"))));
+			tabbedContent = new ModelTabbedContent(this,
+					new ProcessDocument(new StringReader((String) json.get("doc"))));
 			jp.addTab(tabbedContent);
 		} catch (final IOException e) {
 			SwingUtils.showError(e);

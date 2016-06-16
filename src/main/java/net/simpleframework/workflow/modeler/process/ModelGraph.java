@@ -13,6 +13,20 @@ import javax.swing.JPopupMenu;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
+import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGeometry;
+import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.swing.handler.mxConnectPreview;
+import com.mxgraph.swing.handler.mxKeyboardHandler;
+import com.mxgraph.swing.handler.mxRubberband;
+import com.mxgraph.util.mxEvent;
+import com.mxgraph.util.mxEventObject;
+import com.mxgraph.util.mxEventSource.mxIEventListener;
+import com.mxgraph.util.mxPoint;
+import com.mxgraph.view.mxCellState;
+import com.mxgraph.view.mxGraph;
+import com.mxgraph.view.mxMultiplicity;
+
 import net.simpleframework.common.StringUtils;
 import net.simpleframework.workflow.graph.CellValue;
 import net.simpleframework.workflow.graph.GraphUtils;
@@ -28,20 +42,6 @@ import net.simpleframework.workflow.schema.StartNode;
 import net.simpleframework.workflow.schema.SubNode;
 import net.simpleframework.workflow.schema.TransitionNode;
 import net.simpleframework.workflow.schema.UserNode;
-
-import com.mxgraph.model.mxCell;
-import com.mxgraph.model.mxGeometry;
-import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.swing.handler.mxConnectPreview;
-import com.mxgraph.swing.handler.mxKeyboardHandler;
-import com.mxgraph.swing.handler.mxRubberband;
-import com.mxgraph.util.mxEvent;
-import com.mxgraph.util.mxEventObject;
-import com.mxgraph.util.mxEventSource.mxIEventListener;
-import com.mxgraph.util.mxPoint;
-import com.mxgraph.view.mxCellState;
-import com.mxgraph.view.mxGraph;
-import com.mxgraph.view.mxMultiplicity;
 
 /**
  * Licensed under the Apache License, Version 2.0
@@ -100,8 +100,8 @@ public class ModelGraph extends mxGraphComponent {
 				TaskCell previous;
 				if ((previous = (TaskCell) evt.getProperty("previous")) != null) {
 					final TaskCell terminal = (TaskCell) evt.getProperty("terminal");
-					final TransitionNode transition = (TransitionNode) getProcessNode().getNodeById(
-							((TransitionCell) evt.getProperty("edge")).getId());
+					final TransitionNode transition = (TransitionNode) getProcessNode()
+							.getNodeById(((TransitionCell) evt.getProperty("edge")).getId());
 					final String id = previous.getId();
 					final String terminalId = terminal.getId();
 					if (id.equals(transition.getFrom())) {
@@ -139,8 +139,8 @@ public class ModelGraph extends mxGraphComponent {
 					final ProcessNode processNode = getProcessNode();
 					if (cells[0] instanceof TaskCell) {
 						final TaskCell task = (TaskCell) cells[0];
-						final AbstractTaskNode node = (AbstractTaskNode) processNode.getNodeById(task
-								.getId());
+						final AbstractTaskNode node = (AbstractTaskNode) processNode
+								.getNodeById(task.getId());
 						if (node != null) {
 							for (final TransitionNode t : node.fromTransitions()) {
 								processNode.removeNode(t.getId());
@@ -185,7 +185,7 @@ public class ModelGraph extends mxGraphComponent {
 				}
 				final List<mxPoint> points = geometry.getPoints();
 				if (points != null) {
-					final List<String> al = new ArrayList<String>();
+					final List<String> al = new ArrayList<>();
 					for (final mxPoint p : points) {
 						al.add(p.getX() + "," + p.getY());
 					}
@@ -201,8 +201,8 @@ public class ModelGraph extends mxGraphComponent {
 		graph.setAllowDanglingEdges(false); // 不允许空边
 		graph.setMultigraph(false); // 不允许多个连接
 
-		final mxMultiplicity startNodeValidation = new mxMultiplicity(false, null, null, null, 0,
-				"0", null, $m("ModelGraph.0"), null, true) {
+		final mxMultiplicity startNodeValidation = new mxMultiplicity(false, null, null, null, 0, "0",
+				null, $m("ModelGraph.0"), null, true) {
 
 			@Override
 			public boolean checkType(final mxGraph graph, final Object value, final String type,
@@ -266,8 +266,8 @@ public class ModelGraph extends mxGraphComponent {
 					nodeClass = MergeNode.class;
 				}
 				if (nodeClass != null) {
-					graph.addCell(new TaskCell((AbstractTaskNode) getProcessNode().addNode(nodeClass),
-							x, y));
+					graph.addCell(
+							new TaskCell((AbstractTaskNode) getProcessNode().addNode(nodeClass), x, y));
 				}
 				tb.normal.doClick();
 			}

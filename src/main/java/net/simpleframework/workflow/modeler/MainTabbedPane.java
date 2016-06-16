@@ -17,8 +17,8 @@ public class MainTabbedPane extends JTabbedPaneEx {
 	public static final String TABBED_CONTENT = "__tabbedContent";
 
 	public ITabbedContent getTabbedContent(final JComponent component) {
-		return component == null ? null : (ITabbedContent) component
-				.getClientProperty(TABBED_CONTENT);
+		return component == null ? null
+				: (ITabbedContent) component.getClientProperty(TABBED_CONTENT);
 	}
 
 	public ITabbedContent getSelectedTabbedContent() {

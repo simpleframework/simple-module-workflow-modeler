@@ -14,12 +14,6 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JFileChooser;
 
-import net.simpleframework.common.StringUtils;
-import net.simpleframework.common.coll.ArrayUtils;
-import net.simpleframework.workflow.graph.GraphUtils;
-import net.simpleframework.workflow.modeler.utils.ITabbedContent;
-import net.simpleframework.workflow.modeler.utils.SwingUtils;
-
 import com.mxgraph.canvas.mxICanvas;
 import com.mxgraph.canvas.mxSvgCanvas;
 import com.mxgraph.util.mxCellRenderer;
@@ -28,6 +22,12 @@ import com.mxgraph.util.mxDomUtils;
 import com.mxgraph.util.mxUtils;
 import com.mxgraph.util.mxXmlUtils;
 import com.mxgraph.view.mxGraph;
+
+import net.simpleframework.common.StringUtils;
+import net.simpleframework.common.coll.ArrayUtils;
+import net.simpleframework.workflow.graph.GraphUtils;
+import net.simpleframework.workflow.modeler.utils.ITabbedContent;
+import net.simpleframework.workflow.modeler.utils.SwingUtils;
 
 /**
  * Licensed under the Apache License, Version 2.0
@@ -114,10 +114,8 @@ public abstract class ApplicationActions {
 					"html|VML文件 (.html)" };
 			final JFileChooser chooser = SwingUtils.createJFileChooser(fileFilters);
 			if (chooser.showSaveDialog(mainPane) == JFileChooser.APPROVE_OPTION) {
-				final String type = "."
-						+ StringUtils.split(
-								fileFilters[ArrayUtils.indexOf(chooser.getChoosableFileFilters(),
-										chooser.getFileFilter())], "|")[0];
+				final String type = "." + StringUtils.split(fileFilters[ArrayUtils
+						.indexOf(chooser.getChoosableFileFilters(), chooser.getFileFilter())], "|")[0];
 				String filename = chooser.getSelectedFile().getAbsolutePath();
 				if (!filename.toLowerCase().endsWith(type)) {
 					filename += type;
@@ -129,8 +127,8 @@ public abstract class ApplicationActions {
 								null, new CanvasFactory() {
 									@Override
 									public mxICanvas createCanvas(final int width, final int height) {
-										final mxSvgCanvas canvas = new mxSvgCanvas(mxDomUtils
-												.createSvgDocument(width, height));
+										final mxSvgCanvas canvas = new mxSvgCanvas(
+												mxDomUtils.createSvgDocument(width, height));
 										canvas.setEmbedded(true);
 										return canvas;
 									}
@@ -140,8 +138,9 @@ public abstract class ApplicationActions {
 						GraphUtils.writePNG(graph, new FileOutputStream(new File(filename)));
 					} else if (".html".equals(type)) {
 						mxUtils.writeFile(
-								mxXmlUtils.getXml(mxCellRenderer.createVmlDocument(graph, null, 1, null,
-										null).getDocumentElement()), filename);
+								mxXmlUtils.getXml(mxCellRenderer
+										.createVmlDocument(graph, null, 1, null, null).getDocumentElement()),
+								filename);
 					}
 				} catch (final IOException e1) {
 					SwingUtils.showError(e1);

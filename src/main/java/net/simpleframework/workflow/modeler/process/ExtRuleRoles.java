@@ -29,7 +29,7 @@ import net.simpleframework.workflow.modeler.utils.SwingUtils;
 
 public class ExtRuleRoles {
 
-	private static Map<String, Map<String, Object>> ALL_CLASS1 = new HashMap<String, Map<String, Object>>();
+	private static Map<String, Map<String, Object>> ALL_CLASS1 = new HashMap<>();
 
 	private void init() {
 		final ModelGraph modelGraph = une.getModelGraph();
@@ -94,7 +94,7 @@ public class ExtRuleRoles {
 
 	@SuppressWarnings("rawtypes")
 	public List<String> getRuleRoles() {
-		final List<String> l = new ArrayList<String>();
+		final List<String> l = new ArrayList<>();
 		final List<?> list = getAllClass();
 		for (final Object obj : list) {
 			if (obj instanceof Map) {
@@ -104,8 +104,8 @@ public class ExtRuleRoles {
 		return l;
 	}
 
-	public static Map<String, JPanel> components = new HashMap<String, JPanel>();
-	public static Map<String, Component> pcomponents = new HashMap<String, Component>();
+	public static Map<String, JPanel> components = new HashMap<>();
+	public static Map<String, Component> pcomponents = new HashMap<>();
 
 	public void show(final String text) {
 		final Iterator<String> iter = components.keySet().iterator();
@@ -119,20 +119,20 @@ public class ExtRuleRoles {
 	@SuppressWarnings("rawtypes")
 	public JPanel getUI() {
 		final JPanel p2 = new JPanel(new BorderLayout());
-		final List<Component> p2s = new ArrayList<Component>();
+		final List<Component> p2s = new ArrayList<>();
 		final List<?> list = getAllClass();
 		for (final Object obj : list) {
 			if (obj instanceof Map) {
 				final String cname = (String) ((Map) obj).get("name");
 				final List<?> params = (List<?>) ((Map) obj).get("params");
 				if (null != params) {
-					final List<Component> p1s = new ArrayList<Component>();
+					final List<Component> p1s = new ArrayList<>();
 					for (final Object obj2 : params) {
 						if (obj2 instanceof Map) {
 							final Map par = (Map) obj2;
 							final String pname = (String) par.get("name");
 
-							final Vector<String> ps = new Vector<String>();
+							final Vector<String> ps = new Vector<>();
 							final List<?> values = (List<?>) par.get("values");
 							JPanel m1 = null;
 							Component pc = null;
@@ -305,7 +305,7 @@ public class ExtRuleRoles {
 	}
 
 	private Map<String, String> getValues(final String vs) {
-		final HashMap<String, String> m = new HashMap<String, String>();
+		final HashMap<String, String> m = new HashMap<>();
 		if (StringUtils.hasText(vs)) {
 			final String[] _v = vs.split(";");
 			for (final String v : _v) {

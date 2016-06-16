@@ -87,9 +87,9 @@ public class UserNodeEditor extends AbstractEditorDialog {
 				formClassTf = new JTextField());
 		final JPanel l3 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.16")),
 				timoutHoursTf = new JTextField());
-		final JPanel l4 = SwingUtils.createKV(new JLabel(), SwingUtils.createFlow(
-				emptyCb = new JCheckBox($m("UserNodeEditor.21")), fallbackCb = new JCheckBox(
-						$m("UserNodeEditor.22"))));
+		final JPanel l4 = SwingUtils.createKV(new JLabel(),
+				SwingUtils.createFlow(emptyCb = new JCheckBox($m("UserNodeEditor.21")),
+						fallbackCb = new JCheckBox($m("UserNodeEditor.22"))));
 		p1.add(SwingUtils.createVertical(l1, l2, l3, l4));
 
 		final JPanel p2 = new JPanel(new BorderLayout());
@@ -106,11 +106,11 @@ public class UserNodeEditor extends AbstractEditorDialog {
 				participantTypeChanged(null);
 			}
 		});
-		m2 = SwingUtils
-				.createKV(new JLabel($m("UserNodeEditor.5")), participantTf = new JTextField());
+		m2 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.5")),
+				participantTf = new JTextField());
 
-		m3 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.6")), relativeTypeCb = new JComboBox(
-				ERelativeType.values()));
+		m3 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.6")),
+				relativeTypeCb = new JComboBox(ERelativeType.values()));
 		relativeTypeCb.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(final ItemEvent e) {
@@ -124,8 +124,8 @@ public class UserNodeEditor extends AbstractEditorDialog {
 
 		m9 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.17")), paramsTf = new JTextField());
 
-		m4 = SwingUtils
-				.createKV(new JLabel($m("UserNodeEditor.7")), preActivityTf = new JTextField());
+		m4 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.7")),
+				preActivityTf = new JTextField());
 		m5 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.8")), relativeTf = new JTextField());
 		m6 = SwingUtils.createKV(new JLabel($m("UserNodeEditor.9")),
 				responseValueTf = new JTextField());
@@ -205,8 +205,8 @@ public class UserNodeEditor extends AbstractEditorDialog {
 		m11.setVisible(i == 1);
 
 		if (i >= d_rr_n) {
-			final String text = extParticipant.getRuleRoleName(participantTypeCb.getSelectedItem()
-					.toString());
+			final String text = extParticipant
+					.getRuleRoleName(participantTypeCb.getSelectedItem().toString());
 			participantTf.setText(text);
 			extParticipant.initPComponentsValues(text, paramsTf.getText());
 			extParticipant.show(text);

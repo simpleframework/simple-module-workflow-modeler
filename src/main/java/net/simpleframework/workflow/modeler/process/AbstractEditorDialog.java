@@ -20,6 +20,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.mxgraph.model.mxCell;
+
 import net.simpleframework.workflow.graph.CellValue;
 import net.simpleframework.workflow.graph.TaskCell;
 import net.simpleframework.workflow.graph.TransitionCell;
@@ -28,8 +30,6 @@ import net.simpleframework.workflow.modeler.utils.SwingUtils;
 import net.simpleframework.workflow.schema.Node;
 import net.simpleframework.workflow.schema.ProcessDocument;
 import net.simpleframework.workflow.schema.ProcessNode;
-
-import com.mxgraph.model.mxCell;
 
 /**
  * Licensed under the Apache License, Version 2.0

@@ -166,7 +166,8 @@ public class LoggerPanel extends JPanel {
 				{
 					putValue(Action.NAME, $m("LoggerPanel.3"));
 					putValue(Action.SMALL_ICON, SwingUtils.loadIcon("copy.png"));
-					final boolean selectedText = editor.getSelectionEnd() - editor.getSelectionStart() > 0;
+					final boolean selectedText = editor.getSelectionEnd()
+							- editor.getSelectionStart() > 0;
 					setEnabled(selectedText);
 				}
 

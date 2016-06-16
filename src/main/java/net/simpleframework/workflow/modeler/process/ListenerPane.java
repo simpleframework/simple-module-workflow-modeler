@@ -119,7 +119,7 @@ public class ListenerPane extends AEDPanel {
 				if (listenerClass == null) {
 					listeners.add(name);
 				} else {
-					final Vector<String> tmp = new Vector<String>(listeners);
+					final Vector<String> tmp = new Vector<>(listeners);
 					final int j = tmp.indexOf(listenerClass);
 					if (j >= 0) {
 						tmp.set(j, name);

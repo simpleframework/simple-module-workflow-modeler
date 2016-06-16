@@ -99,7 +99,7 @@ public class ModelerSettings extends PropertiesContextSettings {
 	}
 
 	public Collection<String> getConnections() {
-		return new HashSet<String>(ArrayUtils.asList(StringUtils.split(getProperty("connections"))));
+		return new HashSet<>(ArrayUtils.asList(StringUtils.split(getProperty("connections"))));
 	}
 
 	public void setConnections(final Collection<String> coll) {

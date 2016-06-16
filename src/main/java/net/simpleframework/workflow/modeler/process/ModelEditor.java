@@ -37,11 +37,11 @@ import net.simpleframework.workflow.schema.ProcessNode;
  */
 public class ModelEditor extends AbstractEditorDialog {
 
-	private static final Vector<String> startupTypes = ArrayUtils.asVector(
-			$m("AbstractProcessStartupType.Manual"), $m("AbstractProcessStartupType.Email"));
+	private static final Vector<String> startupTypes = ArrayUtils
+			.asVector($m("AbstractProcessStartupType.Manual"), $m("AbstractProcessStartupType.Email"));
 
-	private static final Vector<String> participantTypes = ArrayUtils.asVector(
-			$m("AbstractParticipantType.BaseRole"), $m("AbstractParticipantType.User"));
+	private static final Vector<String> participantTypes = ArrayUtils
+			.asVector($m("AbstractParticipantType.BaseRole"), $m("AbstractParticipantType.User"));
 
 	protected ListenerPane listenerPane;
 
@@ -79,8 +79,8 @@ public class ModelEditor extends AbstractEditorDialog {
 				formClassTf = new JTextField());
 		final JPanel l7 = SwingUtils.createKV(new JLabel($m("ModelEditor.12")),
 				viewClassTf = new JTextField());
-		final JPanel l8 = SwingUtils.createKV(new JLabel(), instanceSharedCb = new JCheckBox(
-				$m("ModelEditor.7")));
+		final JPanel l8 = SwingUtils.createKV(new JLabel(),
+				instanceSharedCb = new JCheckBox($m("ModelEditor.7")));
 		p1.add(SwingUtils.createVertical(l1, l2, l3, l4, l5, l6, l7, l8));
 
 		final JPanel startup = SwingUtils.createKV(new JLabel($m("ModelEditor.11")),
@@ -95,8 +95,8 @@ public class ModelEditor extends AbstractEditorDialog {
 			}
 		});
 
-		m1 = SwingUtils.createKV(new JLabel($m("ModelEditor.9")), participantTypeCb = new JComboBox(
-				participantTypes));
+		m1 = SwingUtils.createKV(new JLabel($m("ModelEditor.9")),
+				participantTypeCb = new JComboBox(participantTypes));
 		participantTypeCb.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(final ItemEvent e) {

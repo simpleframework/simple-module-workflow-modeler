@@ -138,15 +138,15 @@ public class AboutDialog extends EnhancedDialog {
 		gbc.weighty = 1.0;
 		gbc.fill = GridBagConstraints.BOTH;
 		final Set<Entry<Object, Object>> sets = System.getProperties().entrySet();
-		final Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+		final Vector<Vector<Object>> data = new Vector<>();
 		final Iterator<Entry<Object, Object>> it = sets.iterator();
 		while (it.hasNext()) {
 			final Entry<Object, Object> entry = it.next();
 			final Vector<Object> row = ArrayUtils.asVector(entry.getKey(), entry.getValue());
 			data.add(row);
 		}
-		final DefaultTableModel tm = new DefaultTableModel(data, ArrayUtils.asVector(
-				$m("AboutDialog.2"), $m("AboutDialog.3"))) {
+		final DefaultTableModel tm = new DefaultTableModel(data,
+				ArrayUtils.asVector($m("AboutDialog.2"), $m("AboutDialog.3"))) {
 
 			@Override
 			public boolean isCellEditable(final int row, final int column) {

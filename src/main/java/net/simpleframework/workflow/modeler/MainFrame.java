@@ -65,8 +65,8 @@ public class MainFrame extends JFrame implements IMainPane {
 			final int width = settings.getWindowWidth();
 			final int height = settings.getWindowHeight();
 			setBounds(new Rectangle(settings.getWindowX(), settings.getWindowY(),
-					width == 0 ? getMinimumSize().width : width, height == 0 ? getMinimumSize().height
-							: height));
+					width == 0 ? getMinimumSize().width : width,
+					height == 0 ? getMinimumSize().height : height));
 		}
 
 		setJMenuBar(new MainMenu());

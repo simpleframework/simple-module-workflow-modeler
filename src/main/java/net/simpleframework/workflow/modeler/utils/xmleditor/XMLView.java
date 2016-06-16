@@ -27,8 +27,8 @@ public class XMLView extends PlainView {
 	}
 
 	@Override
-	protected int drawUnselectedText(final Graphics g, int x, final int y, final int p0, final int p1)
-			throws BadLocationException {
+	protected int drawUnselectedText(final Graphics g, int x, final int y, final int p0,
+			final int p1) throws BadLocationException {
 
 		final XMLDocument doc = (XMLDocument) getDocument();
 		final XMLToken token = doc.getScannerStart(p0);

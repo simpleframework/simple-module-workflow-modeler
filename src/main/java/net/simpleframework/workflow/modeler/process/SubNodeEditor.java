@@ -20,6 +20,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 
+import com.mxgraph.model.mxCell;
+
 import net.simpleframework.common.StringUtils;
 import net.simpleframework.common.coll.KVMap;
 import net.simpleframework.workflow.modeler.utils.JTableEx;
@@ -27,8 +29,6 @@ import net.simpleframework.workflow.modeler.utils.JTableEx.ColumnEx;
 import net.simpleframework.workflow.modeler.utils.SwingUtils;
 import net.simpleframework.workflow.schema.SubNode;
 import net.simpleframework.workflow.schema.SubNode.VariableMapping;
-
-import com.mxgraph.model.mxCell;
 
 /**
  * Licensed under the Apache License, Version 2.0

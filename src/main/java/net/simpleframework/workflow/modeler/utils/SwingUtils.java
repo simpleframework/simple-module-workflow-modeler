@@ -120,7 +120,8 @@ public abstract class SwingUtils {
 		return chooser;
 	}
 
-	public static void showPopupMenu(final JPopupMenu popup, final Component component, int x, int y) {
+	public static void showPopupMenu(final JPopupMenu popup, final Component component, int x,
+			int y) {
 		final Point p = new Point(x, y);
 		SwingUtilities.convertPointToScreen(p, component);
 		final Dimension size = popup.getPreferredSize();

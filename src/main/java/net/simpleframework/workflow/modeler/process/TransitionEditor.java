@@ -56,8 +56,8 @@ public class TransitionEditor extends AbstractEditorDialog {
 				transitionTypeCb = new JComboBox(transitionTypes), false);
 		p2 = SwingUtils.createKV(new JLabel($m("TransitionEditor.3")),
 				expressionTf = new JTextField());
-		p3 = SwingUtils.createKV(new JLabel($m("TransitionEditor.4")), logicCb = new JComboBox(
-				ETransitionLogic.values()), false);
+		p3 = SwingUtils.createKV(new JLabel($m("TransitionEditor.4")),
+				logicCb = new JComboBox(ETransitionLogic.values()), false);
 		p4 = SwingUtils.createKV(new JLabel($m("TransitionEditor.5")),
 				SwingUtils.createSelected(transitionIdTf = new JTextField(), new JButton()));
 		p5 = SwingUtils.createKV(new JLabel(), manualCb = new JCheckBox($m("TransitionEditor.6")));
